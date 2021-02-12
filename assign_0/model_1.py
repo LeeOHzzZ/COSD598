@@ -140,13 +140,11 @@ def main():
 
     scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
 
-    epoch_list = []
     train_loss = []
     train_accuracy = []
     test_loss = []
     test_accuracy = []
     for epoch in range(1, args.epochs + 1):
-        epoch_list.append(epoch)
 
         loss, accuracy = train(args, model, device, train_loader, optimizer, epoch)
         train_loss.append(loss)
@@ -160,10 +158,8 @@ def main():
     if args.save_model:
         torch.save(model.state_dict(), "mnist_cnn.pt")
 
-    plot([epoch_list, train_loss], 'epoch_idx', 'train_loss', 'train_loss_vs_epoch')
-    plot([epoch_list, train_accuracy], 'epoch_idx', 'train_accuracy', 'train_accuracy_vs_epoch')
-    plot([epoch_list, test_loss], 'epoch_idx', 'test_loss', 'test_loss_vs_epoch')
-    plot([epoch_list, train_accuracy], 'epoch_idx', 'test_accuracy', 'test_accuracy_vs_epoch') 
+    plot([train_loss, test_loss], 'epoch_idx', 'loss', 'model_1_loss_vs_epoch')
+    plot([train_accuracy, test_accuracy], 'epoch_idx', 'accuracy (%)', 'model_1_accuracy_vs_epoch')
 
 if __name__ == '__main__':
     main()
