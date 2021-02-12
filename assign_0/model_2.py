@@ -18,7 +18,7 @@ class Net(nn.Module):
 
         self.dropout1 = nn.Dropout(0.25)
         self.dropout2 = nn.Dropout(0.5)
-        self.fc1 = nn.Linear(9216, 128)
+        self.fc1 = nn.Linear(7744, 128)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
@@ -26,7 +26,7 @@ class Net(nn.Module):
         x = F.relu(x)
         # newly added conv layer
         x = self.conv3(x)
-
+        x = F.relu(x)
         x = self.conv2(x)
         x = F.relu(x)
         x = F.max_pool2d(x, 2)

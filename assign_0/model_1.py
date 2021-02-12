@@ -6,13 +6,12 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
-
+from plot import plot
 
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(1, 32, 3, 1)
-        self.conv_3 = nn.Conv2d(32, 32, 3, 1)
         self.conv2 = nn.Conv2d(32, 64, 3, 1)
         self.dropout1 = nn.Dropout(0.25)
         self.dropout2 = nn.Dropout(0.5)
@@ -22,10 +21,6 @@ class Net(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         x = F.relu(x)
-
-        x = self.conv_3(x)
-        x = F.relu(x)
-        
         x = self.conv2(x)
         x = F.relu(x)
         x = F.max_pool2d(x, 2)
@@ -41,20 +36,33 @@ class Net(nn.Module):
 
 def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
+    correct = 0
+    train_loss = 0
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
         output = model(data)
+
+        pred = output.argmax(dim=1, keepdim=True)
+        correct += pred.eq(target.view_as(pred)).sum().item()
+
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
+        
+        train_loss += loss.item()
+        #train_loss += F.nll_loss(output, target, reduction='sum').item()
         if batch_idx % args.log_interval == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(train_loader.dataset),
                 100. * batch_idx / len(train_loader), loss.item()))
             if args.dry_run:
                 break
-
+    avg_train_loss = train_loss / len(train_loader)
+    avg_train_accuracy = 100. * correct/len(train_loader.dataset)
+    print('average train loss is {}; avg train accuracy is {}'.format(avg_train_loss, avg_train_accuracy))
+    return avg_train_loss, avg_train_accuracy
+    
 
 def test(model, device, test_loader):
     model.eval()
@@ -73,6 +81,7 @@ def test(model, device, test_loader):
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
+    return test_loss, 100. * correct/len(test_loader.dataset)
 
 
 def main():
@@ -100,6 +109,7 @@ def main():
                         help='For Saving the current Model')
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
+    print("Use Cuda is {}".format(use_cuda))        
 
     torch.manual_seed(args.seed)
 
@@ -129,14 +139,31 @@ def main():
     optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
 
     scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
+
+    epoch_list = []
+    train_loss = []
+    train_accuracy = []
+    test_loss = []
+    test_accuracy = []
     for epoch in range(1, args.epochs + 1):
-        train(args, model, device, train_loader, optimizer, epoch)
-        test(model, device, test_loader)
+        epoch_list.append(epoch)
+
+        loss, accuracy = train(args, model, device, train_loader, optimizer, epoch)
+        train_loss.append(loss)
+        train_accuracy.append(accuracy)
+
+        loss, accuracy = test(model, device, test_loader)
+        test_loss.append(loss)
+        test_accuracy.append(accuracy)
         scheduler.step()
 
     if args.save_model:
         torch.save(model.state_dict(), "mnist_cnn.pt")
 
+    plot([epoch_list, train_loss], 'epoch_idx', 'train_loss', 'train_loss_vs_epoch')
+    plot([epoch_list, train_accuracy], 'epoch_idx', 'train_accuracy', 'train_accuracy_vs_epoch')
+    plot([epoch_list, test_loss], 'epoch_idx', 'test_loss', 'test_loss_vs_epoch')
+    plot([epoch_list, train_accuracy], 'epoch_idx', 'test_accuracy', 'test_accuracy_vs_epoch') 
 
 if __name__ == '__main__':
     main()
