@@ -51,7 +51,7 @@ Email: yl29@princeton.edu
 <br/>
 
 ### Model 3 Result:
-#### Modification based on model-2
+#### Modification based on model-1
 ```python
   # add another linear layer
   def __init__(self):
@@ -68,9 +68,6 @@ Email: yl29@princeton.edu
   def forward(self, x):
       x = self.conv1(x)
       x = F.relu(x)
-      # newly added conv layer
-      x = self.conv3(x)
-      x = F.relu(x)
       x = self.conv2(x)
       x = F.relu(x)
       x = F.max_pool2d(x, 2)
@@ -79,7 +76,9 @@ Email: yl29@princeton.edu
       x = self.fc1(x)
       x = F.relu(x)
       x = self.dropout2(x)
-      # adding the fc layer here
+      # newly added fc layer
+      x = self.fc3(x)
+
       x = self.fc2(x)
       output = F.log_softmax(x, dim=1)
       return output
