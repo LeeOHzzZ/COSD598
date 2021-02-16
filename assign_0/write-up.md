@@ -45,6 +45,7 @@ Email: yl29@princeton.edu
 - loss vs. epoch  
 ![model2_training_loss_vs_epoch](model_2_loss_vs_epoch.png)  
 <br/>
+
 - loss vs. epoch  
 ![model2_accuracy_vs_epoch](model_2_accuracy_vs_epoch.png)  
 
@@ -86,5 +87,6 @@ Email: yl29@princeton.edu
 - loss vs. epoch  
 ![model3_training_loss_vs_epoch](model_3_loss_vs_epoch.png)  
 <br/>
+
 - loss vs. epoch  
 ![model3_accuracy_vs_epoch](model_3_accuracy_vs_epoch.png)  
