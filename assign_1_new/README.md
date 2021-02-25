@@ -45,6 +45,7 @@ Please use the default batch size, learning rate, optimizer in the following exp
 *Test accuracy (top 1)* of pruned models on CIFAR10 and MNIST (sparsity = 10%). `--compression 1` means sparsity = 10^-1.
 ```
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression 1
+# my commands
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner rand --compression 1 --expid task_1_rand_cifar10 --gpu 
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner snip --compression 1 --expid task_1_snip_cifar10 --gpu 
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner grasp --compression 1 --expid task_1_grasp_cifar10 --gpu 
@@ -53,6 +54,12 @@ python main.py --model-class lottery --model vgg16 --dataset cifar10 --experimen
 ```
 ```
 python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner synflow --compression 1
+# my commands
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner rand --compression 1 --expid task_1_rand_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner snip --compression 1 --expid task_1_snip_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner grasp --compression 1 --expid task_1_grasp_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner synflow --compression 1 --expid task_1_synflow_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner mag --compression 1 --pre-epochs 200 --expid task_1_mag_mnist --gpu
 ```
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
@@ -65,6 +72,17 @@ Prune models on CIFAR10 with VGG16, please replace {} with sparsity 10^-a for a 
 
 ```
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow  --compression {}
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner rand --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_rand --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner snip --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_snip --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner grasp --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_grasp --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_synflow --gpu
+# separate mag workload, because of the huge pre-training...
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.05 -expid task_2_mag_0.05 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.1 -expid task_2_mag_0.1 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.2 -expid task_2_mag_0.2 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.5 -expid task_2_mag_0.5 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 1 -expid task_2_mag_1 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 2 -expid task_2_mag_2 --gpu
 ```
 ***Testing accuracy (top 1)***
 
