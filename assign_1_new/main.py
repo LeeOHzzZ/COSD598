@@ -1,7 +1,6 @@
 import argparse
 import json
 import os
-from Experiments import example
 from Experiments import singleshot
 from Experiments import multishot
 from Experiments.theory import unit_conservation
@@ -14,18 +13,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Network Compression')
     # Training Hyperparameters
     training_args = parser.add_argument_group('training')
-    training_args.add_argument('--dataset', type=str, default='cifar10',
+    training_args.add_argument('--dataset', type=str, default='mnist',
                         choices=['mnist','cifar10','cifar100','tiny-imagenet','imagenet'],
                         help='dataset (default: mnist)')
-    training_args.add_argument('--model', type=str, default='vgg16', choices=['fc','conv',
+    training_args.add_argument('--model', type=str, default='fc', choices=['fc','conv',
                         'vgg11','vgg11-bn','vgg13','vgg13-bn','vgg16','vgg16-bn','vgg19','vgg19-bn',
                         'resnet18','resnet20','resnet32','resnet34','resnet44','resnet50',
                         'resnet56','resnet101','resnet110','resnet110','resnet152','resnet1202',
                         'wide-resnet18','wide-resnet20','wide-resnet32','wide-resnet34','wide-resnet44','wide-resnet50',
                         'wide-resnet56','wide-resnet101','wide-resnet110','wide-resnet110','wide-resnet152','wide-resnet1202'],
                         help='model architecture (default: fc)')
-    training_args.add_argument('--hidden', type=int, default=400,
-                        help='size of the hidden layer for MLP (default: 400)')
     training_args.add_argument('--model-class', type=str, default='default', choices=['default','lottery','tinyimagenet','imagenet'],
                         help='model class (default: default)')
     training_args.add_argument('--dense-classifier', type=bool, default=False,
@@ -35,12 +32,12 @@ if __name__ == '__main__':
     training_args.add_argument('--optimizer', type=str, default='adam', choices=['sgd','momentum','adam','rms'],
                         help='optimizer (default: adam)')
     training_args.add_argument('--train-batch-size', type=int, default=256,
-                        help='input batch size for training (default: 256)')
+                        help='input batch size for training (default: 64)')
     training_args.add_argument('--test-batch-size', type=int, default=256,
                         help='input batch size for testing (default: 256)')
     training_args.add_argument('--pre-epochs', type=int, default=0,
                         help='number of epochs to train before pruning (default: 0)')
-    training_args.add_argument('--post-epochs', type=int, default=1000,
+    training_args.add_argument('--post-epochs', type=int, default=10,
                         help='number of epochs to train after pruning (default: 10)')
     training_args.add_argument('--lr', type=float, default=0.001,
                         help='learning rate (default: 0.001)')
@@ -77,6 +74,10 @@ if __name__ == '__main__':
                         help='whether to prune in train mode (default: False)')
     pruning_args.add_argument('--reinitialize', type=bool, default=False,
                         help='whether to reinitialize weight parameters after pruning (default: False)')
+    pruning_args.add_argument('--shuffle', type=bool, default=False,
+                        help='whether to shuffle masks after pruning (default: False)')
+    pruning_args.add_argument('--invert', type=bool, default=False,
+                        help='whether to invert scores during pruning (default: False)')
     pruning_args.add_argument('--pruner-list', type=str, nargs='*', default=[],
                         help='list of pruning strategies for singleshot (default: [])')
     pruning_args.add_argument('--prune-epoch-list', type=int, nargs='*', default=[],
@@ -86,8 +87,8 @@ if __name__ == '__main__':
     pruning_args.add_argument('--level-list', type=int, nargs='*', default=[],
                         help='list of number of prune-train cycles (levels) for multishot (default: [])')
     ## Experiment Hyperparameters ##
-    parser.add_argument('--experiment', type=str, default='example', 
-                        choices=['example','singleshot','multishot','unit-conservation',
+    parser.add_argument('--experiment', type=str, default='singleshot', 
+                        choices=['singleshot','multishot','unit-conservation',
                         'layer-conservation','imp-conservation','schedule-conservation'],
                         help='experiment name (default: example)')
     parser.add_argument('--expid', type=str, default='',
@@ -129,10 +130,7 @@ if __name__ == '__main__':
         with open(args.result_dir + '/args.json', 'w') as f:
             json.dump(args.__dict__, f, sort_keys=True, indent=4)
 
-    print(args.compression)
     ## Run Experiment ##
-    if args.experiment == 'example':
-        example.run(args)
     if args.experiment == 'singleshot':
         singleshot.run(args)
     if args.experiment == 'multishot':
@@ -145,3 +143,4 @@ if __name__ == '__main__':
         imp_conservation.run(args)
     if args.experiment == 'schedule-conservation':
         schedule_conservation.run(args)
+
