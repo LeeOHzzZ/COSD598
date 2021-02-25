@@ -61,14 +61,14 @@ python main.py --model-class lottery --model vgg16 --dataset cifar10 --experimen
 ```
 python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner synflow --compression 1
 # My command:
-python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner rand --compression 1 --expid task_1_rand_fc --gpu 0
+python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner rand --compression 1 --expid task_1_rand_fc --gpu 0
 
-python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner snip --compression 1 --expid task_1_snip_fc --gpu 1
+python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner snip --compression 1 --expid task_1_snip_fc --gpu 1
 
-python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner grasp --compression 1 --expid task_1_grasp_fc --gpu 2
+python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner grasp --compression 1 --expid task_1_grasp_fc --gpu 2
 
-python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner synflow --compression 1 --expid task_1_synflow_fc --gpu 3
-python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner mag --pre-epochs 200 --compression 1 --expid task_1_mag_fc 
+python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner synflow --compression 1 --expid task_1_synflow_fc --gpu 3
+python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner mag --pre-epochs 200 --compression 1 --expid task_1_mag_fc 
 ```
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
