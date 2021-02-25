@@ -45,6 +45,11 @@ Please use the default batch size, learning rate, optimizer in the following exp
 *Test accuracy (top 1)* of pruned models on CIFAR10 and MNIST (sparsity = 10%). `--compression 1` means sparsity = 10^-1.
 ```
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression 1
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner rand --compression 1 --expid task_1_rand_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner snip --compression 1 --expid task_1_snip_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner grasp --compression 1 --expid task_1_grasp_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression 1 --expid task_1_synflow_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --compression 1 --pre-epochs 200 --expid task_1_mag_cifar10 --gpu
 ```
 ```
 python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner synflow --compression 1
