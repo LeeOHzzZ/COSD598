@@ -73,7 +73,7 @@ python main.py --model-class default --model fc --dataset mnist --experiment exa
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
 |Cifar10 | VGG16 |  76.79%  |      |   10%     |   49.92%  |    80.61%     |
-|MNIST| FC |  97.85%  |   97.78%   |     97.95%   |  97.83%    |    10.0%     |
+|MNIST| FC |  97.85%  |   97.78%   |     97.95%   |  97.83%    |    10.0% (98.24% with 10 epochs pre-train)    |
 
 
 #### Tuning compression ratio. Please fill the results table:
