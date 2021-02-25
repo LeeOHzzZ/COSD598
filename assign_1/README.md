@@ -73,7 +73,7 @@ python main.py --model-class default --model fc --dataset mnist --experiment exa
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
 |Cifar10 | VGG16 |  76.79%  |      |   10%     |   49.92%  |    80.61%     |
-|MNIST| FC |  54.51%  |   43.54%   |     56.48%   |  55.53%    |    10.0%     |
+|MNIST| FC |  97.85%  |   43.54%   |     97.95%   |  97.83%    |    10.0%     |
 
 
 #### Tuning compression ratio. Please fill the results table:
@@ -81,6 +81,13 @@ Prune models on CIFAR10 with VGG16, please replace {} with sparsity 10^-a for a 
 
 ```
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment example --pruner synflow  --compression {}
+
+# my commans:
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment example --pruner rand  --compression {0.05,0.1,0.2,0.5,1,2} --expid task2_rand --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment example --pruner snip  --compression {0.05,0.1,0.2,0.5,1,2} --expid task2_snip --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment example --pruner grasp  --compression {0.05,0.1,0.2,0.5,1,2} --expid task2_grasp --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment example --pruner synflow  --compression {0.05,0.1,0.2,0.5,1,2} --expid task2_synflow --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment example --pruner mag  --pre-epochs 200 --compression {0.05,0.1,0.2,0.5,1,2} --expid task2_mag --gpu
 ```
 ***Testing accuracy (top 1)***
 
