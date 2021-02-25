@@ -9,7 +9,7 @@ from train import *
 from prune import *
 
 import timeit
-import subprocess
+import os
 
 def run(args):
     ## Random Seed and Device ##
@@ -24,7 +24,8 @@ def run(args):
     test_loader = load.dataloader(args.dataset, args.test_batch_size, False, args.workers)
 
     log_filename = '{}/{}'.format(args.result_dir, 'result.log')
-    subprocess.run(['echo', 'start', '>', log_filename])
+    fout = open(log_filename, 'w')
+    fout.write('start!\n')
 
     if args.compression_list == []:
         args.compression_list.append(args.compression)
@@ -77,13 +78,6 @@ def run(args):
         print("Parameter Sparsity: {}/{} ({:.4f})".format(total_params, possible_params, total_params / possible_params))
         print("FLOP Sparsity: {}/{} ({:.4f})".format(total_flops, possible_flops, total_flops / possible_flops))
         
-        subprocess.run(['echo', 'compression :{}'.format(compression), '>>', log_filename])
-        subprocess.run(['echo', 'Train results:\n {}'.format(train_result), '>>', log_filename])
-        subprocess.run(['echo', 'Prune results:\n {}'.format(prune_result), '>>', log_filename])
-        subprocess.run(['echo', 'Parameter Sparsity: {}/{} ({:.4f})'.format(total_params, possible_params, total_params / possible_params),
-                        '>>', log_filename])
-        subprocess.run(['echo', "FLOP Sparsity: {}/{} ({:.4f})".format(total_flops, possible_flops, total_flops / possible_flops), 
-                        '>>', log_filename])
         ## recording testing time for task 2 ##
         start_time = timeit.default_timer()
         # evaluating the model, including some data gathering overhead
@@ -91,8 +85,12 @@ def run(args):
         end_time = timeit.default_timer()
         print("Testing time: {}".format(end_time - start_time))
 
-        subprocess.run(['echo', "Testing time: {}".format(end_time - start_time), '>>', log_filename])
-
+        fout.write('compression ratio: {}\n'.format(compression))
+        fout.write('Train results:\n {}\n'.format(train_result))
+        fout.write('Prune results:\n {}\n'.format(prune_result))
+        fout.write('Parameter Sparsity: {}/{} ({:.4f})\n'.format(total_params, possible_params, total_params / possible_params))
+        fout.write("FLOP Sparsity: {}/{} ({:.4f})\n".format(total_flops, possible_flops, total_flops / possible_flops))
+        fout.write("Testing time: {}\n\n\n".format(end_time - start_time))
         ## Save Results and Model ##
         if args.save:
             print('Saving results.')
