@@ -72,8 +72,8 @@ python main.py --model-class default --model fc --dataset cifar10 --experiment e
 ```
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
-|Cifar10 | VGG16 |    |      |        |     |         |
-|MNIST| FC |    |      |        |      |         |
+|Cifar10 | VGG16 |  76.79%  |      |   10%     |   49.92%  |    80.61%     |
+|MNIST| FC |  54.51%  |   43.54%   |     56.48%   |  55.53%    |    10.0%     |
 
 
 #### Tuning compression ratio. Please fill the results table:
