@@ -60,6 +60,16 @@ python main.py --model-class lottery --model vgg16 --dataset cifar10 --experimen
 ```
 ```
 python main.py --model-class default --model fc --dataset cifar10 --experiment example --pruner synflow --compression 1
+# My command:
+python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner rand --compression 1 --expid task_1_rand --gpu 0 | tee ./log/task_1_rand.txt 
+
+python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner snip --compression 1 --expid task_1_snip --gpu 1 | tee ./log/task_1_snip.txt
+
+python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner grasp --compression 1 --expid task_1_grasp --gpu 2 | tee ./log/task_1_grasp.txt
+
+python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner synflow --compression 1 --expid task_1_synflow --gpu 3 | tee ./log/task_1_synflow.txt
+
+python main.py --model-class lottery --model fc --dataset cifar10 --experiment example --pruner mag --pre-epochs 200 --compression 1 --expid task_1_mag | tee ./log/task_1_rand.txt
 ```
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
