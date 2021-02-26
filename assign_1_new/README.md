@@ -45,14 +45,26 @@ Please use the default batch size, learning rate, optimizer in the following exp
 *Test accuracy (top 1)* of pruned models on CIFAR10 and MNIST (sparsity = 10%). `--compression 1` means sparsity = 10^-1.
 ```
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression 1
+# my commands
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner rand --compression 1 --expid task_1_rand_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner snip --compression 1 --expid task_1_snip_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner grasp --compression 1 --expid task_1_grasp_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression 1 --expid task_1_synflow_cifar10 --gpu 
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --compression 1 --pre-epochs 200 --expid task_1_mag_cifar10 --gpu
 ```
 ```
 python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner synflow --compression 1
+# my commands
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner rand --compression 1 --expid task_1_rand_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner snip --compression 1 --expid task_1_snip_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner grasp --compression 1 --expid task_1_grasp_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner synflow --compression 1 --expid task_1_synflow_mnist --gpu
+python main.py --model-class default --model fc --dataset mnist --experiment singleshot --pruner mag --compression 1 --pre-epochs 200 --expid task_1_mag_mnist --gpu
 ```
 |   Data  |   Arch |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|----------------|-------------|-------------|-------------|---------------|----------------|
-|Cifar10 | VGG16 |    |      |        |     |         |
-|MNIST| FC |    |      |        |      |         |
+|Cifar10 | VGG16 | 78.44%  |  89.21%    |    80.09%    |  22.38%   |   80.92%      |
+|MNIST| FC |  96.21%  |   98.26%   |   97.07%     |   96.82%   |    94.97%     |
 
 
 #### Tuning compression ratio. Please fill the results table:
@@ -60,40 +72,51 @@ Prune models on CIFAR10 with VGG16, please replace {} with sparsity 10^-a for a 
 
 ```
 python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow  --compression {}
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner rand --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_rand --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner snip --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_snip --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner grasp --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_grasp --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner synflow --compression-list {0.05,0.1,0.2,0.5,1,2} -expid task_2_synflow --gpu
+# separate mag workload, because of the huge pre-training...
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.05 -expid task_2_mag_0.05 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.1 -expid task_2_mag_0.1 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.2 -expid task_2_mag_0.2 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 0.5 -expid task_2_mag_0.5 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 1 -expid task_2_mag_1 --gpu
+python main.py --model-class lottery --model vgg16 --dataset cifar10 --experiment singleshot --pruner mag --pre-epochs 200 --compression 2 -expid task_2_mag_2 --gpu
 ```
 ***Testing accuracy (top 1)***
 
 |   Compression |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|-------------|-------------|-------------|---------------|----------------|
-| 0.05|    |      |        |     |         |
-| 0.1|    |      |        |     |         |
-| 0.2|    |      |        |      |         |
-| 0.5|    |      |        |      |         |
-| 1|    |      |        |      |         |
-| 2|    |      |        |      |         |
+| 0.05|  79.34%  |  89.45%    |   78.31%     |  29.24%   |     78.01%    |
+| 0.1| 80.59%   |   89.06%   |     78.51%    |  17.41%   |    81.25%     |
+| 0.2|  79.65%  |    89.18%   |    79.93%    |  12.37%    |    78.63%    |
+| 0.5|  75.82%  |   89.77%   |    77.16%    |   11.82%   |     80.85%     |
+| 1|  10.0%  |  88.30%   |   76.43%     |   10.04%   |    81.04%     |
+| 2|  10.0%  |  15.56%   |     53.53%   |   13.91%   |    10.00%     |
 
 ***Testing time***
 
 |   Compression |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|-------------|-------------|-------------|---------------|----------------|
-| 0.05|    |      |        |     |         |
-| 0.1|    |      |        |     |         |
-| 0.2|    |      |        |      |         |
-| 0.5|    |      |        |      |         |
-| 1|    |      |        |      |         |
-| 2|    |      |        |      |         |
+| 0.05| 2.24686   |   2.24146    |  2.24065      |  2.23529   |  2.27756       |
+| 0.1|  2.23533  |   2.23204   |    2.23628    |  2.25550   |    2.23810     |
+| 0.2|  2.23843  |   2.24448   |    2.25314    |   2.24408   |    2.25986     |
+| 0.5|  2.24722  |   2.23186   |    2.24642    |    2.24707   |     2.26203    |
+| 1|  2.22442  |   2.26428   |   2.24512     |   2.25322   |    2.26746     |
+| 2|  2.23237  |   2.23331   |    2.23781    |   2.24748   |     2.24359     |
 
 
 ***FLOP***
 
 |   Compression |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|-------------|-------------|-------------|---------------|----------------|
-| 0.05|    |      |        |     |         |
-| 0.1|    |      |        |     |         |
-| 0.2|    |      |        |      |         |
-| 0.5|    |      |        |      |         |
-| 1|    |      |        |      |         |
-| 2|    |      |        |      |         |
+| 0.05|  279473230  |   297256726   |    301140357    |   256738852  |    297416253     |
+| 0.1|  249017342  |   282390227   |    289955251    |   229925437  |    282917399     |
+| 0.2|  197913366  |  255384262    |    245382304    |   179099186   |    257542273     |
+| 0.5|  99270958  |   177116952   |   138207996     |   119043862   |    201378012     |
+| 1|  31675248  |   74477668   |   61603571     |   54320754   |   143221205      |
+| 2|  3405561  |   10436313   |    16049046    |   19449427   |    57801609    |
 
 For better visualization, you are encouraged to transfer the above three tables into curves and present them as three figrues.
 ### 2. The compression ratio of each layer
