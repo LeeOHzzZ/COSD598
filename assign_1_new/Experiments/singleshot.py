@@ -81,7 +81,13 @@ def run(args):
         ## recording testing time for task 2 ##
         start_time = timeit.default_timer()
         # evaluating the model, including some data gathering overhead
-        eval(model, loss, test_loader, device, args.verbose)
+        # eval(model, loss, test_loader, device, args.verbose)
+        model.eval()
+        with torch.no_grad():
+            for data, target in test_loader:
+                data, target = data.to(device), target.to(device)
+                model(data)
+                break
         end_time = timeit.default_timer()
         print("Testing time: {}".format(end_time - start_time))
 
@@ -90,7 +96,9 @@ def run(args):
         fout.write('Prune results:\n {}\n'.format(prune_result))
         fout.write('Parameter Sparsity: {}/{} ({:.4f})\n'.format(total_params, possible_params, total_params / possible_params))
         fout.write("FLOP Sparsity: {}/{} ({:.4f})\n".format(total_flops, possible_flops, total_flops / possible_flops))
-        fout.write("Testing time: {}\n\n\n".format(end_time - start_time))
+        fout.write("Testing time: {}\n".format(end_time - start_time))
+        fout.write("remaining weights: {}\n".format(int(prune_result['sparsity'] * prune_result['size'])))
+        fout.write('flop each layer: {}\n'.format(int(prune_result['sparsity'] * prune_result['flops'])))
         ## Save Results and Model ##
         if args.save:
             print('Saving results.')
@@ -99,10 +107,10 @@ def run(args):
             pre_result.to_pickle("{}/{}/pre-train.pkl".format(args.result_dir, compression))
             post_result.to_pickle("{}/{}/post-train.pkl".format(args.result_dir, compression))
             prune_result.to_pickle("{}/{}/compression.pkl".format(args.result_dir, compression))
-            torch.save(model.state_dict(), "{}/{}/model.pt".format(args.result_dir, compression))
-            torch.save(optimizer.state_dict(),
-                    "{}/{}/optimizer.pt".format(args.result_dir, compression))
-            torch.save(scheduler.state_dict(),
-                    "{}/{}/scheduler.pt".format(args.result_dir, compression))
+            # torch.save(model.state_dict(), "{}/{}/model.pt".format(args.result_dir, compression))
+            # torch.save(optimizer.state_dict(),
+            #         "{}/{}/optimizer.pt".format(args.result_dir, compression))
+            # torch.save(scheduler.state_dict(),
+            #         "{}/{}/scheduler.pt".format(args.result_dir, compression))
 
 
