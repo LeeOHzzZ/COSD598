@@ -102,7 +102,7 @@ def run(args):
                     model(data)
                     break
             end_time = timeit.default_timer()
-            print("Testing time: {}".format(end_time - start_time))
+            print("Testing time: {:.4f}".format(end_time - start_time))
 
             fout.write('compression ratio: {} ::: pruner: {}'.format(compression, p))
             fout.write('Train results:\n {}\n'.format(train_result))
@@ -110,7 +110,7 @@ def run(args):
             fout.write('Parameter Sparsity: {}/{} ({:.4f})\n'.format(total_params, possible_params, total_params / possible_params))
             fout.write("FLOP Sparsity: {}/{} ({:.4f})\n".format(total_flops, possible_flops, total_flops / possible_flops))
             fout.write("Testing time: {}\n".format(end_time - start_time))
-            fout.write("remaining weights: {}\n".format((prune_result['sparsity'] * prune_result['size'])))
+            fout.write("remaining weights: \n{}\n".format((prune_result['sparsity'] * prune_result['size'])))
             fout.write('flop each layer: {}\n'.format((prune_result['sparsity'] * prune_result['flops']).values.tolist()))
             ## Save Results and Model ##
             if args.save:
