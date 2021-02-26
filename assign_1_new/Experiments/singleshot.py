@@ -110,9 +110,8 @@ def run(args):
             fout.write('Parameter Sparsity: {}/{} ({:.4f})\n'.format(total_params, possible_params, total_params / possible_params))
             fout.write("FLOP Sparsity: {}/{} ({:.4f})\n".format(total_flops, possible_flops, total_flops / possible_flops))
             fout.write("Testing time: {}\n".format(end_time - start_time))
-            fout.write("remaining weights: {}\n".format(int((prune_result['sparsity'] * prune_result['size']).values.tolist()
-                        )))
-            fout.write('flop each layer: {}\n'.format(int((prune_result['sparsity'] * prune_result['flops']).values.tolist())))
+            fout.write("remaining weights: {}\n".format((prune_result['sparsity'] * prune_result['size'])))
+            fout.write('flop each layer: {}\n'.format((prune_result['sparsity'] * prune_result['flops']).values.tolist()))
             ## Save Results and Model ##
             if args.save:
                 print('Saving results.')
