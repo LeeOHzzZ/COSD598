@@ -30,24 +30,34 @@ def run(args):
     if args.compression_list == []:
         args.compression_list.append(args.compression)
     
+    ## Model, Loss, Optimizer ##
+    print('Creating {}-{} model.'.format(args.model_class, args.model))
+    model = load.model(args.model, args.model_class)(input_shape, 
+                                                    num_classes, 
+                                                    args.dense_classifier, 
+                                                    args.pretrained).to(device)
+    loss = nn.CrossEntropyLoss()
+    opt_class, opt_kwargs = load.optimizer(args.optimizer)
+    optimizer = opt_class(generator.parameters(model), lr=args.lr, weight_decay=args.weight_decay, **opt_kwargs)
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=args.lr_drops, gamma=args.lr_drop_rate)
+
+
+    ## Pre-Train ##
+    print('Pre-Train for {} epochs.'.format(args.pre_epochs))
+    pre_result = train_eval_loop(model, loss, optimizer, scheduler, train_loader, 
+                                test_loader, device, args.pre_epochs, args.verbose)
+    
+    ## Save Original ##
+    torch.save(model.state_dict(),"{}/pre_train_model.pt".format(args.result_dir))
+    torch.save(optimizer.state_dict(),"{}/pre_train_optimizer.pt".format(args.result_dir))
+    torch.save(scheduler.state_dict(),"{}/pre_train_scheduler.pt".format(args.result_dir))
+
     for compression in args.compression_list:
-
-        ## Model, Loss, Optimizer ##
-        print('Creating {}-{} model.'.format(args.model_class, args.model))
-        model = load.model(args.model, args.model_class)(input_shape, 
-                                                        num_classes, 
-                                                        args.dense_classifier, 
-                                                        args.pretrained).to(device)
-        loss = nn.CrossEntropyLoss()
-        opt_class, opt_kwargs = load.optimizer(args.optimizer)
-        optimizer = opt_class(generator.parameters(model), lr=args.lr, weight_decay=args.weight_decay, **opt_kwargs)
-        scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=args.lr_drops, gamma=args.lr_drop_rate)
-
-
-        ## Pre-Train ##
-        print('Pre-Train for {} epochs.'.format(args.pre_epochs))
-        pre_result = train_eval_loop(model, loss, optimizer, scheduler, train_loader, 
-                                    test_loader, device, args.pre_epochs, args.verbose)
+        # Reset Model, Optimizer, and Scheduler
+        print('compression ratio: {}'.format(compression))
+        model.load_state_dict(torch.load("{}/pre_train_model.pt".format(args.result_dir), map_location=device))
+        optimizer.load_state_dict(torch.load("{}/pre_train_optimizer.pt".format(args.result_dir), map_location=device))
+        scheduler.load_state_dict(torch.load("{}/pre_train_scheduler.pt".format(args.result_dir), map_location=device))
 
         ## Prune ##
         print('Pruning with {} for {} epochs.'.format(args.pruner, args.prune_epochs))
