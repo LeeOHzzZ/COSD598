@@ -14,6 +14,7 @@ from .mutator import EnasMutator
 
 logger = logging.getLogger(__name__)
 
+import json
 
 class EnasTrainer(Trainer):
     """
@@ -208,7 +209,10 @@ class EnasTrainer(Trainer):
                     metrics["loss"] = loss.item()
                     meters.update(metrics)
 
-                    meter_list.append(meters)
+                meter_dict = json.loads(json.dumps('{' + meters.summary() + '}'))
+                #print("meter_dict: {}".format(meter_dict))
+                #print("type of meter_dict: {}".format(type(json.loads(meter_dict))))
+                meter_list.append(json.loads(meter_dict))
 
                 logger.info("Test Epoch [%d/%d] Arc [%d/%d] Summary  %s",
                             epoch + 1, self.num_epochs, arc_id + 1, self.test_arc_per_epoch,

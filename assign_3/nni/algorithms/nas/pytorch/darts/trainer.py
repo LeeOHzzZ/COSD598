@@ -10,6 +10,7 @@ from nni.nas.pytorch.trainer import Trainer
 from nni.nas.pytorch.utils import AverageMeterGroup
 
 from .mutator import DartsMutator
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -124,13 +125,16 @@ class DartsTrainer(Trainer):
                 X, y = X.to(self.device), y.to(self.device)
                 logits = self.model(X)
                 metrics = self.metrics(logits, y)
+                loss = self.loss(logits, y)
+                metrics["loss"] = loss.item()
                 meters.update(metrics)
-
-                meter_list.append(meters)
 
                 if self.log_frequency is not None and step % self.log_frequency == 0:
                     logger.info("Epoch [%s/%s] Step [%s/%s]  %s", epoch + 1,
                                 self.num_epochs, step + 1, len(self.test_loader), meters)
+            
+            meter_dict = json.loads(json.dumps('{' + meters.summary() + '}'))
+            meter_list.append(json.loads(meter_dict))
                 
         return meter_list
 

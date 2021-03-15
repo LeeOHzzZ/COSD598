@@ -7,6 +7,8 @@ from collections import OrderedDict
 import numpy as np
 import torch
 
+import json
+
 _counter = 0
 
 _logger = logging.getLogger(__name__)
@@ -87,7 +89,7 @@ class AverageMeterGroup:
         """
         Return a summary string of group data.
         """
-        return "  ".join(v.summary() for v in self.meters.values())
+        return ", ".join(v.summary() for v in self.meters.values())
 
 
 class AverageMeter:
@@ -137,7 +139,7 @@ class AverageMeter:
         return fmtstr.format(**self.__dict__)
 
     def summary(self):
-        fmtstr = '{name}: {avg' + self.fmt + '}'
+        fmtstr = '"{name}": {avg' + self.fmt + '}'
         return fmtstr.format(**self.__dict__)
 
 

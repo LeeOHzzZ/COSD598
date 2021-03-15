@@ -151,6 +151,7 @@ class Trainer(BaseTrainer):
             # training
             train_start_time = timeit.default_timer()
             _logger.info("Epoch %d Training", epoch + 1)
+            _logger.info("Can you hear me?")
             self.train_one_epoch(epoch)
             train_end_time = timeit.default_timer()
 
@@ -160,12 +161,16 @@ class Trainer(BaseTrainer):
                 # validation
                 _logger.info("Epoch %d Validating", epoch + 1)
                 meter_list = self.validate_one_epoch(epoch)
-                summary_dict[total_gpu_hour] = meter_list
+                print('gpu_hour: {}\nmeter_list:{}\n'.format(total_gpu_hour, meter_list))
+                # _logger.info("gpu_hour: %d \n meter_list: %s", total_gpu_hour, meter_list)
+                summary_dict['{:4f}'.format(total_gpu_hour)] = meter_list
+                # summary_dict[total_gpu_hour] = json.loads(json.dumps(meter_list))
             for callback in self.callbacks:
                 callback.on_epoch_end(epoch)
+            print('summary_list: \n{}\n'.format(summary_dict))
     
         with open('summary_list.json', 'w') as fout:
-            json.dump(fout, summary_dict, indent=2)
+            json.dump(summary_dict, fout, indent=2)
 
     def validate(self):
         """
