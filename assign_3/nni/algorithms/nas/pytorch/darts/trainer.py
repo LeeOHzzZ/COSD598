@@ -111,6 +111,10 @@ class DartsTrainer(Trainer):
                             self.num_epochs, step + 1, len(self.train_loader), meters)
 
     def validate_one_epoch(self, epoch):
+
+        # return list of meters
+        meter_list = []
+
         self.model.eval()
         self.mutator.eval()
         meters = AverageMeterGroup()
@@ -121,9 +125,14 @@ class DartsTrainer(Trainer):
                 logits = self.model(X)
                 metrics = self.metrics(logits, y)
                 meters.update(metrics)
+
+                meter_list.append(meters)
+
                 if self.log_frequency is not None and step % self.log_frequency == 0:
                     logger.info("Epoch [%s/%s] Step [%s/%s]  %s", epoch + 1,
                                 self.num_epochs, step + 1, len(self.test_loader), meters)
+                
+        return meter_list
 
     def _logits_and_loss(self, X, y):
         self.mutator.reset()

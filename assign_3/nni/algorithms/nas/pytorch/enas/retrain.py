@@ -18,9 +18,8 @@ from nni.nas.pytorch.utils import AverageMeter
 logger = logging.getLogger('nni')
 
 
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
 writer = SummaryWriter()
-
 
 def train(config, train_loader, model, optimizer, criterion, epoch):
     top1 = AverageMeter("top1")
@@ -102,7 +101,6 @@ def validate(config, valid_loader, model, criterion, epoch, cur_step):
     logger.info("Valid: [{:3d}/{}] Final Prec@1 {:.4%}".format(epoch + 1, config.epochs, top1.avg))
 
     return top1.avg
-
 
 if __name__ == "__main__":
     parser = ArgumentParser("darts")

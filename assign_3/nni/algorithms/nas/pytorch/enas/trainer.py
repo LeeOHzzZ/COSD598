@@ -190,6 +190,10 @@ class EnasTrainer(Trainer):
             self.mutator_optim.step()
 
     def validate_one_epoch(self, epoch):
+        
+        # return a list of meters
+        meter_list = []
+
         with torch.no_grad():
             for arc_id in range(self.test_arc_per_epoch):
                 meters = AverageMeterGroup()
@@ -204,6 +208,10 @@ class EnasTrainer(Trainer):
                     metrics["loss"] = loss.item()
                     meters.update(metrics)
 
+                    meter_list.append(meters)
+
                 logger.info("Test Epoch [%d/%d] Arc [%d/%d] Summary  %s",
                             epoch + 1, self.num_epochs, arc_id + 1, self.test_arc_per_epoch,
                             meters.summary())
+        
+        return meter_list

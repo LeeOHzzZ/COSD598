@@ -9,6 +9,8 @@ from abc import abstractmethod
 
 import torch
 
+import timeit
+
 from .base_trainer import BaseTrainer
 
 _logger = logging.getLogger(__name__)
@@ -133,21 +135,37 @@ class Trainer(BaseTrainer):
         validate : bool
             If ``true``, will do validation every epoch.
         """
+
+        # implement GPU time measure
+        total_gpu_hour = 0
+        sec_per_hour = 3600
+        # summary dict for testing accuracy against gpu hours
+        summary_dict = {}
+        
+
+
         for epoch in range(self.num_epochs):
             for callback in self.callbacks:
                 callback.on_epoch_begin(epoch)
 
             # training
+            train_start_time = timeit.default_timer()
             _logger.info("Epoch %d Training", epoch + 1)
             self.train_one_epoch(epoch)
+            train_end_time = timeit.default_timer()
+
+            total_gpu_hour += (train_end_time-train_start_time)/sec_per_hour
 
             if validate:
                 # validation
                 _logger.info("Epoch %d Validating", epoch + 1)
-                self.validate_one_epoch(epoch)
-
+                meter_list = self.validate_one_epoch(epoch)
+                summary_dict[total_gpu_hour] = meter_list
             for callback in self.callbacks:
                 callback.on_epoch_end(epoch)
+    
+        with open('summary_list.json', 'w') as fout:
+            json.dump(fout, summary_dict, indent=2)
 
     def validate(self):
         """

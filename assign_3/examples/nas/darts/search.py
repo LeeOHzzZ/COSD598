@@ -20,13 +20,14 @@ logger = logging.getLogger('nni')
 if __name__ == "__main__":
     parser = ArgumentParser("darts")
     parser.add_argument("--layers", default=8, type=int)
-    parser.add_argument("--batch-size", default=64, type=int)
+    parser.add_argument("--batch-size", default=32, type=int)
     parser.add_argument("--log-frequency", default=10, type=int)
     parser.add_argument("--epochs", default=50, type=int)
     parser.add_argument("--channels", default=16, type=int)
     parser.add_argument("--unrolled", default=False, action="store_true")
     parser.add_argument("--visualization", default=False, action="store_true")
     parser.add_argument("--v1", default=False, action="store_true")
+    parser.add_argument("--gpu", default=1, type=int)
     args = parser.parse_args()
 
     dataset_train, dataset_valid = datasets.get_dataset("cifar10")
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     if args.v1:
         from nni.algorithms.nas.pytorch.darts import DartsTrainer
         trainer = DartsTrainer(model,
+                               device=torch.device("cuda:{}".format(args.gpu)),
                                loss=criterion,
                                metrics=lambda output, target: accuracy(output, target, topk=(1,)),
                                optimizer=optim,

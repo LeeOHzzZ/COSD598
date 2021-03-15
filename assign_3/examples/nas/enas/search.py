@@ -27,6 +27,7 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", default=None, type=int, help="Number of epochs (default: macro 310, micro 150)")
     parser.add_argument("--visualization", default=False, action="store_true")
     parser.add_argument("--v1", default=False, action="store_true")
+    parser.add_argument("--gpu", default=2, type=int)
     args = parser.parse_args()
 
     dataset_train, dataset_valid = datasets.get_dataset("cifar10")
@@ -51,6 +52,7 @@ if __name__ == "__main__":
 
     if args.v1:
         trainer = enas.EnasTrainer(model,
+                                   device=torch.device('cuda:{}'.format(args.gpu)),
                                    loss=criterion,
                                    metrics=accuracy,
                                    reward_function=reward_accuracy,

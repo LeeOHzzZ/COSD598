@@ -15,11 +15,11 @@ def accuracy(output, target, topk=(1,)):
     if target.ndimension() > 1:
         target = target.max(1)[1]
 
-    correct = pred.eq(target.view(1, -1).expand_as(pred))
+    correct = pred.eq(target.reshape(1, -1).expand_as(pred))
 
     res = dict()
     for k in topk:
-        correct_k = correct[:k].view(-1).float().sum(0)
+        correct_k = correct[:k].reshape(-1).float().sum(0)
         res["acc{}".format(k)] = correct_k.mul_(1.0 / batch_size).item()
     return res
 
