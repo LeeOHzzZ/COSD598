@@ -11,7 +11,9 @@ from torch.utils.tensorboard import SummaryWriter
 
 import datasets
 import utils
-from model import CNN
+from macro import GeneralNetwork
+from micro import MicroNetwork
+
 from nni.nas.pytorch.fixed import apply_fixed_architecture
 from nni.nas.pytorch.utils import AverageMeter
 
@@ -107,7 +109,7 @@ if __name__ == "__main__":
     parser.add_argument("--layers", default=20, type=int)
     parser.add_argument("--batch-size", default=32, type=int)
     parser.add_argument("--log-frequency", default=10, type=int)
-    parser.add_argument("--epochs", default=600, type=int)
+    parser.add_argument("--epochs", default=250, type=int)
     parser.add_argument("--aux-weight", default=0.4, type=float)
     parser.add_argument("--drop-path-prob", default=0.2, type=float)
     parser.add_argument("--workers", default=4)
@@ -117,7 +119,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     dataset_train, dataset_valid = datasets.get_dataset("cifar10", cutout_length=16)
 
-    model = CNN(32, 3, 36, 10, args.layers, auxiliary=True)
+    # model = CNN(32, 3, 36, 10, args.layers, auxiliary=True)
+    model = MicroNetwork(num_layers=6, out_channels=20, num_nodes=5, dropout_rate=0.1, use_aux_heads=False)
     apply_fixed_architecture(model, args.arc_checkpoint)
     criterion = nn.CrossEntropyLoss()
 
