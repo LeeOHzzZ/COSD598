@@ -40,7 +40,14 @@ def train(config, train_loader, model, optimizer, criterion, epoch):
         bs = x.size(0)
 
         optimizer.zero_grad()
-        logits, aux_logits = model(x)
+        logits = model(x)
+        
+        if isinstance(logits, tuple):
+            logits, aux_logits = logits
+            aux_loss = loss(aux_logits, y)
+        else:
+            aux_loss = 0
+       
         loss = criterion(logits, y)
         if config.aux_weight > 0.:
             loss += config.aux_weight * criterion(aux_logits, y)
@@ -117,7 +124,7 @@ if __name__ == "__main__":
     parser.add_argument("--arc-checkpoint", default="./checkpoints/epoch_0.json")
 
     args = parser.parse_args()
-    dataset_train, dataset_valid = datasets.get_dataset("cifar10", cutout_length=16)
+    dataset_train, dataset_valid = datasets.get_dataset("cifar10")
 
     # model = CNN(32, 3, 36, 10, args.layers, auxiliary=True)
     model = MicroNetwork(num_layers=6, out_channels=20, num_nodes=5, dropout_rate=0.1, use_aux_heads=False)
@@ -143,8 +150,8 @@ if __name__ == "__main__":
 
     best_top1 = 0.
     for epoch in range(args.epochs):
-        drop_prob = args.drop_path_prob * epoch / args.epochs
-        model.drop_path_prob(drop_prob)
+        # drop_prob = args.drop_path_prob * epoch / args.epochs
+        # model.drop_path_prob(drop_prob)
 
         # training
         train(args, train_loader, model, optimizer, criterion, epoch)
