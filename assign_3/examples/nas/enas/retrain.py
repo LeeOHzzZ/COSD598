@@ -49,8 +49,8 @@ def train(config, train_loader, model, optimizer, criterion, epoch):
             aux_loss = 0
        
         loss = criterion(logits, y)
-        if config.aux_weight > 0.:
-            loss += config.aux_weight * criterion(aux_logits, y)
+        loss += config.aux_weight * aux_loss
+
         loss.backward()
         # gradient clipping
         nn.utils.clip_grad_norm_(model.parameters(), config.grad_clip)
