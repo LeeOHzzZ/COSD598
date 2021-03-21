@@ -1,0 +1,2 @@
+Best Top1 Accuracy:
+90.59% @ 250 Epochs
