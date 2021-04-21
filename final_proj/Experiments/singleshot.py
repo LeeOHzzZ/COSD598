@@ -17,6 +17,7 @@ import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as ddp
 
 
+
 def run(args):
     ## Random Seed and Device ##
     torch.manual_seed(args.seed)
@@ -46,36 +47,40 @@ def run(args):
                                                     num_classes, 
                                                     args.dense_classifier, 
                                                     args.pretrained)
-    model = model.to(device)
 
     #########################################
     # enable distributed data parallelism
     #########################################
-    # These are the parameters used to initialize the process group
-    env_dict = {
-        key: os.environ[key]
-        for key in ("MASTER_ADDR", "MASTER_PORT", "RANK", "WORLD_SIZE")
-    }
-    print(f"[{os.getpid()}] Initializing process group with: {env_dict}")
-    dist.init_process_group(backend="nccl")
-    print(
-        f"[{os.getpid()}] world_size = {dist.get_world_size()}, "
-        + f"rank = {dist.get_rank()}, backend={dist.get_backend()}"
-    )
-
-    local_rank = args.local_rank
-    
     if (args.data_parallel):
-        n = torch.cuda.device_count() // 4 # local world size is hardwired to 4
-        device_ids = list(range(local_rank*n, (local_rank + 1) * n))
-        print(
-            f"[{os.getpid()}] rank = {dist.get_rank()}, "
-            + f"world_size = {dist.get_world_size()}, n = {n}, device_ids = {device_ids}"
-        )
-        model = model.cuda(device_ids[0])
-        # replace model with ddp model here
-        model = ddp(model, device_ids)
+        # print('entering data_parallel')
+        # # These are the parameters used to initialize the process group
+        # env_dict = {
+        #     key: os.environ[key]
+        #     for key in ("MASTER_ADDR", "MASTER_PORT", "RANK", "WORLD_SIZE")
+        # }
+        # print(f"[{os.getpid()}] Initializing process group with: {env_dict}")
+        # dist.init_process_group(backend="nccl")
+        # print(
+        #     f"[{os.getpid()}] world_size = {dist.get_world_size()}, "
+        #     + f"rank = {dist.get_rank()}, backend={dist.get_backend()}"
+        # )
+
+        # local_rank = args.local_rank
+
+        # n = torch.cuda.device_count() // 4 # local world size is hardwired to 4
+        # device_ids = list(range(local_rank*n, (local_rank + 1) * n))
+        # print(
+        #     f"[{os.getpid()}] rank = {dist.get_rank()}, "
+        #     + f"world_size = {dist.get_world_size()}, n = {n}, device_ids = {device_ids}"
+        # )
+        # model = model.cuda(device_ids[0])
+        # # replace model with ddp model here
+        # model = ddp(model, device_ids)
+        if torch.cuda.device_count() > 1:
+            print("let's use", torch.cuda.device_count(), "GPUs!")
+            model = nn.DataParallel(model)
         
+    model = model.to(device)
 
 
     loss = nn.CrossEntropyLoss()
@@ -87,6 +92,7 @@ def run(args):
     print('Pre-Train for {} epochs.'.format(args.pre_epochs))
     pre_result = train_eval_loop(model, loss, optimizer, scheduler, train_loader, 
                                 test_loader, device, args.pre_epochs, args.verbose)
+    print('Pre-Train finished!')
     
     ## Save Original ##
     torch.save(model.state_dict(),"{}/pre_train_model.pt".format(args.result_dir))
@@ -111,9 +117,12 @@ def run(args):
             
             ## Post-Train ##
             print('Post-Training for {} epochs.'.format(args.post_epochs))
+            post_train_start_time = timeit.default_timer()
             post_result = train_eval_loop(model, loss, optimizer, scheduler, train_loader, 
                                         test_loader, device, args.post_epochs, args.verbose) 
-            
+            post_train_end_time = timeit.default_timer()
+            print("Post Training time: {:.4f}s".format(post_train_end_time - post_train_start_time))
+
             ## Display Results ##
             frames = [pre_result.head(1), pre_result.tail(1), post_result.head(1), post_result.tail(1)]
             train_result = pd.concat(frames, keys=['Init.', 'Pre-Prune', 'Post-Prune', 'Final'])
@@ -138,7 +147,8 @@ def run(args):
             with torch.no_grad():
                 for data, target in test_loader:
                     data, target = data.to(device), target.to(device)
-                    model(data)
+                    temp_eval_out = model(data)
+                    print("Test eval data size: input: {}; output: {}".format(data.size(), temp_eval_out.size()))
                     break
             end_time = timeit.default_timer()
             print("Testing time: {:.4f}".format(end_time - start_time))
@@ -148,7 +158,7 @@ def run(args):
             fout.write('Prune results:\n {}\n'.format(prune_result))
             fout.write('Parameter Sparsity: {}/{} ({:.4f})\n'.format(total_params, possible_params, total_params / possible_params))
             fout.write("FLOP Sparsity: {}/{} ({:.4f})\n".format(total_flops, possible_flops, total_flops / possible_flops))
-            fout.write("Testing time: {}\n".format(end_time - start_time))
+            fout.write("Testing time: {}s\n".format(end_time - start_time))
             fout.write("remaining weights: \n{}\n".format((prune_result['sparsity'] * prune_result['size'])))
             fout.write('flop each layer: {}\n'.format((prune_result['sparsity'] * prune_result['flops']).values.tolist()))
             ## Save Results and Model ##
@@ -167,4 +177,4 @@ def run(args):
 
     fout.close()
 
-    dist.destroy_process_group()
+    # dist.destroy_process_group()

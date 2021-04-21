@@ -1,0 +1,285 @@
+WARNING: this experiment is not being saved.
+Loading cifar10 dataset.
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Creating lottery-vgg16 model.
+let's use 4 GPUs!
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 0.05 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post Training time: 269.5982s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.414332          11.66          50.38
+Final      10    0.594455   0.625896          79.00          98.36
+Prune results:
+                    module   param  ...  score abs sum  prunable
+0    module.layers.0.conv  weight  ...   2.945027e+22      True
+1    module.layers.0.conv    bias  ...   0.000000e+00     False
+2    module.layers.1.conv  weight  ...   2.945027e+22      True
+3    module.layers.1.conv    bias  ...   0.000000e+00     False
+4    module.layers.3.conv  weight  ...   2.945027e+22      True
+5    module.layers.3.conv    bias  ...   0.000000e+00     False
+6    module.layers.4.conv  weight  ...   2.945027e+22      True
+7    module.layers.4.conv    bias  ...   0.000000e+00     False
+8    module.layers.6.conv  weight  ...   2.945027e+22      True
+9    module.layers.6.conv    bias  ...   0.000000e+00     False
+10   module.layers.7.conv  weight  ...   2.945027e+22      True
+11   module.layers.7.conv    bias  ...   0.000000e+00     False
+12   module.layers.8.conv  weight  ...   2.945027e+22      True
+13   module.layers.8.conv    bias  ...   0.000000e+00     False
+14  module.layers.10.conv  weight  ...   2.945027e+22      True
+15  module.layers.10.conv    bias  ...   0.000000e+00     False
+16  module.layers.11.conv  weight  ...   2.945026e+22      True
+17  module.layers.11.conv    bias  ...   0.000000e+00     False
+18  module.layers.12.conv  weight  ...   2.945028e+22      True
+19  module.layers.12.conv    bias  ...   0.000000e+00     False
+20  module.layers.14.conv  weight  ...   2.945027e+22      True
+21  module.layers.14.conv    bias  ...   0.000000e+00     False
+22  module.layers.15.conv  weight  ...   2.945027e+22      True
+23  module.layers.15.conv    bias  ...   0.000000e+00     False
+24  module.layers.16.conv  weight  ...   2.945028e+22      True
+25  module.layers.16.conv    bias  ...   0.000000e+00     False
+26              module.fc  weight  ...   2.945027e+22      True
+27              module.fc    bias  ...   0.000000e+00     False
+
+[28 rows x 13 columns]
+Parameter Sparsity: 13119512/14719818 (0.8913)
+FLOP Sparsity: 297416253/313478154 (0.9488)
+Test eval data size: input: torch.Size([256, 3, 32, 32]); output: torch.Size([256, 10])
+Testing time: 0.2481
+compression ratio: 0.1 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post Training time: 268.9892s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.403529          11.45          49.92
+Final      10    0.592844   0.609175          79.84          98.39
+Prune results:
+                    module   param  ...  score abs sum  prunable
+0    module.layers.0.conv  weight  ...   2.945027e+22      True
+1    module.layers.0.conv    bias  ...   0.000000e+00     False
+2    module.layers.1.conv  weight  ...   2.945027e+22      True
+3    module.layers.1.conv    bias  ...   0.000000e+00     False
+4    module.layers.3.conv  weight  ...   2.945027e+22      True
+5    module.layers.3.conv    bias  ...   0.000000e+00     False
+6    module.layers.4.conv  weight  ...   2.945027e+22      True
+7    module.layers.4.conv    bias  ...   0.000000e+00     False
+8    module.layers.6.conv  weight  ...   2.945027e+22      True
+9    module.layers.6.conv    bias  ...   0.000000e+00     False
+10   module.layers.7.conv  weight  ...   2.945027e+22      True
+11   module.layers.7.conv    bias  ...   0.000000e+00     False
+12   module.layers.8.conv  weight  ...   2.945027e+22      True
+13   module.layers.8.conv    bias  ...   0.000000e+00     False
+14  module.layers.10.conv  weight  ...   2.945027e+22      True
+15  module.layers.10.conv    bias  ...   0.000000e+00     False
+16  module.layers.11.conv  weight  ...   2.945026e+22      True
+17  module.layers.11.conv    bias  ...   0.000000e+00     False
+18  module.layers.12.conv  weight  ...   2.945028e+22      True
+19  module.layers.12.conv    bias  ...   0.000000e+00     False
+20  module.layers.14.conv  weight  ...   2.945027e+22      True
+21  module.layers.14.conv    bias  ...   0.000000e+00     False
+22  module.layers.15.conv  weight  ...   2.945027e+22      True
+23  module.layers.15.conv    bias  ...   0.000000e+00     False
+24  module.layers.16.conv  weight  ...   2.945028e+22      True
+25  module.layers.16.conv    bias  ...   0.000000e+00     False
+26              module.fc  weight  ...   2.945027e+22      True
+27              module.fc    bias  ...   0.000000e+00     False
+
+[28 rows x 13 columns]
+Parameter Sparsity: 11693238/14719818 (0.7944)
+FLOP Sparsity: 282939167/313478154 (0.9026)
+Test eval data size: input: torch.Size([256, 3, 32, 32]); output: torch.Size([256, 10])
+Testing time: 0.2759
+compression ratio: 0.2 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post Training time: 269.0884s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.396133          10.04          51.07
+Final      10    0.563587   0.678803          77.79          97.96
+Prune results:
+                    module   param  ...  score abs sum  prunable
+0    module.layers.0.conv  weight  ...   2.945027e+22      True
+1    module.layers.0.conv    bias  ...   0.000000e+00     False
+2    module.layers.1.conv  weight  ...   2.945027e+22      True
+3    module.layers.1.conv    bias  ...   0.000000e+00     False
+4    module.layers.3.conv  weight  ...   2.945027e+22      True
+5    module.layers.3.conv    bias  ...   0.000000e+00     False
+6    module.layers.4.conv  weight  ...   2.945027e+22      True
+7    module.layers.4.conv    bias  ...   0.000000e+00     False
+8    module.layers.6.conv  weight  ...   2.945027e+22      True
+9    module.layers.6.conv    bias  ...   0.000000e+00     False
+10   module.layers.7.conv  weight  ...   2.945027e+22      True
+11   module.layers.7.conv    bias  ...   0.000000e+00     False
+12   module.layers.8.conv  weight  ...   2.945027e+22      True
+13   module.layers.8.conv    bias  ...   0.000000e+00     False
+14  module.layers.10.conv  weight  ...   2.945027e+22      True
+15  module.layers.10.conv    bias  ...   0.000000e+00     False
+16  module.layers.11.conv  weight  ...   2.945026e+22      True
+17  module.layers.11.conv    bias  ...   0.000000e+00     False
+18  module.layers.12.conv  weight  ...   2.945028e+22      True
+19  module.layers.12.conv    bias  ...   0.000000e+00     False
+20  module.layers.14.conv  weight  ...   2.945027e+22      True
+21  module.layers.14.conv    bias  ...   0.000000e+00     False
+22  module.layers.15.conv  weight  ...   2.945027e+22      True
+23  module.layers.15.conv    bias  ...   0.000000e+00     False
+24  module.layers.16.conv  weight  ...   2.945028e+22      True
+25  module.layers.16.conv    bias  ...   0.000000e+00     False
+26              module.fc  weight  ...   2.945027e+22      True
+27              module.fc    bias  ...   0.000000e+00     False
+
+[28 rows x 13 columns]
+Parameter Sparsity: 9289138/14719818 (0.6311)
+FLOP Sparsity: 257583382/313478154 (0.8217)
+Test eval data size: input: torch.Size([256, 3, 32, 32]); output: torch.Size([256, 10])
+Testing time: 0.3041
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post Training time: 268.9224s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      10    0.505512   0.560110          81.24          98.73
+Prune results:
+                    module   param  ...  score abs sum  prunable
+0    module.layers.0.conv  weight  ...   2.945027e+22      True
+1    module.layers.0.conv    bias  ...   0.000000e+00     False
+2    module.layers.1.conv  weight  ...   2.945027e+22      True
+3    module.layers.1.conv    bias  ...   0.000000e+00     False
+4    module.layers.3.conv  weight  ...   2.945027e+22      True
+5    module.layers.3.conv    bias  ...   0.000000e+00     False
+6    module.layers.4.conv  weight  ...   2.945027e+22      True
+7    module.layers.4.conv    bias  ...   0.000000e+00     False
+8    module.layers.6.conv  weight  ...   2.945027e+22      True
+9    module.layers.6.conv    bias  ...   0.000000e+00     False
+10   module.layers.7.conv  weight  ...   2.945027e+22      True
+11   module.layers.7.conv    bias  ...   0.000000e+00     False
+12   module.layers.8.conv  weight  ...   2.945027e+22      True
+13   module.layers.8.conv    bias  ...   0.000000e+00     False
+14  module.layers.10.conv  weight  ...   2.945027e+22      True
+15  module.layers.10.conv    bias  ...   0.000000e+00     False
+16  module.layers.11.conv  weight  ...   2.945026e+22      True
+17  module.layers.11.conv    bias  ...   0.000000e+00     False
+18  module.layers.12.conv  weight  ...   2.945028e+22      True
+19  module.layers.12.conv    bias  ...   0.000000e+00     False
+20  module.layers.14.conv  weight  ...   2.945027e+22      True
+21  module.layers.14.conv    bias  ...   0.000000e+00     False
+22  module.layers.15.conv  weight  ...   2.945027e+22      True
+23  module.layers.15.conv    bias  ...   0.000000e+00     False
+24  module.layers.16.conv  weight  ...   2.945028e+22      True
+25  module.layers.16.conv    bias  ...   0.000000e+00     False
+26              module.fc  weight  ...   2.945027e+22      True
+27              module.fc    bias  ...   0.000000e+00     False
+
+[28 rows x 13 columns]
+Parameter Sparsity: 4657710/14719818 (0.3164)
+FLOP Sparsity: 201358535/313478154 (0.6423)
+Test eval data size: input: torch.Size([256, 3, 32, 32]); output: torch.Size([256, 10])
+Testing time: 0.3121
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post Training time: 269.2404s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302601          10.00          49.94
+Final      10    0.506201   0.569102          80.83          98.84
+Prune results:
+                    module   param  ...  score abs sum  prunable
+0    module.layers.0.conv  weight  ...   2.945027e+22      True
+1    module.layers.0.conv    bias  ...   0.000000e+00     False
+2    module.layers.1.conv  weight  ...   2.945027e+22      True
+3    module.layers.1.conv    bias  ...   0.000000e+00     False
+4    module.layers.3.conv  weight  ...   2.945027e+22      True
+5    module.layers.3.conv    bias  ...   0.000000e+00     False
+6    module.layers.4.conv  weight  ...   2.945027e+22      True
+7    module.layers.4.conv    bias  ...   0.000000e+00     False
+8    module.layers.6.conv  weight  ...   2.945027e+22      True
+9    module.layers.6.conv    bias  ...   0.000000e+00     False
+10   module.layers.7.conv  weight  ...   2.945027e+22      True
+11   module.layers.7.conv    bias  ...   0.000000e+00     False
+12   module.layers.8.conv  weight  ...   2.945027e+22      True
+13   module.layers.8.conv    bias  ...   0.000000e+00     False
+14  module.layers.10.conv  weight  ...   2.945027e+22      True
+15  module.layers.10.conv    bias  ...   0.000000e+00     False
+16  module.layers.11.conv  weight  ...   2.945026e+22      True
+17  module.layers.11.conv    bias  ...   0.000000e+00     False
+18  module.layers.12.conv  weight  ...   2.945028e+22      True
+19  module.layers.12.conv    bias  ...   0.000000e+00     False
+20  module.layers.14.conv  weight  ...   2.945027e+22      True
+21  module.layers.14.conv    bias  ...   0.000000e+00     False
+22  module.layers.15.conv  weight  ...   2.945027e+22      True
+23  module.layers.15.conv    bias  ...   0.000000e+00     False
+24  module.layers.16.conv  weight  ...   2.945028e+22      True
+25  module.layers.16.conv    bias  ...   0.000000e+00     False
+26              module.fc  weight  ...   2.945027e+22      True
+27              module.fc    bias  ...   0.000000e+00     False
+
+[28 rows x 13 columns]
+Parameter Sparsity: 1475793/14719818 (0.1003)
+FLOP Sparsity: 143301085/313478154 (0.4571)
+Test eval data size: input: torch.Size([256, 3, 32, 32]); output: torch.Size([256, 10])
+Testing time: 0.2588
+compression ratio: 2.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post Training time: 268.9343s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585          10.00          50.00
+Final      10    2.302669   2.302588          10.00          50.00
+Prune results:
+                    module   param  ...  score abs sum  prunable
+0    module.layers.0.conv  weight  ...   2.945027e+22      True
+1    module.layers.0.conv    bias  ...   0.000000e+00     False
+2    module.layers.1.conv  weight  ...   2.945027e+22      True
+3    module.layers.1.conv    bias  ...   0.000000e+00     False
+4    module.layers.3.conv  weight  ...   2.945027e+22      True
+5    module.layers.3.conv    bias  ...   0.000000e+00     False
+6    module.layers.4.conv  weight  ...   2.945027e+22      True
+7    module.layers.4.conv    bias  ...   0.000000e+00     False
+8    module.layers.6.conv  weight  ...   2.945027e+22      True
+9    module.layers.6.conv    bias  ...   0.000000e+00     False
+10   module.layers.7.conv  weight  ...   2.945027e+22      True
+11   module.layers.7.conv    bias  ...   0.000000e+00     False
+12   module.layers.8.conv  weight  ...   2.945027e+22      True
+13   module.layers.8.conv    bias  ...   0.000000e+00     False
+14  module.layers.10.conv  weight  ...   2.945027e+22      True
+15  module.layers.10.conv    bias  ...   0.000000e+00     False
+16  module.layers.11.conv  weight  ...   2.945026e+22      True
+17  module.layers.11.conv    bias  ...   0.000000e+00     False
+18  module.layers.12.conv  weight  ...   2.945028e+22      True
+19  module.layers.12.conv    bias  ...   0.000000e+00     False
+20  module.layers.14.conv  weight  ...   2.945027e+22      True
+21  module.layers.14.conv    bias  ...   0.000000e+00     False
+22  module.layers.15.conv  weight  ...   2.945027e+22      True
+23  module.layers.15.conv    bias  ...   0.000000e+00     False
+24  module.layers.16.conv  weight  ...   2.945028e+22      True
+25  module.layers.16.conv    bias  ...   0.000000e+00     False
+26              module.fc  weight  ...   2.945027e+22      True
+27              module.fc    bias  ...   0.000000e+00     False
+
+[28 rows x 13 columns]
+Parameter Sparsity: 151390/14719818 (0.0103)
+FLOP Sparsity: 57830479/313478154 (0.1845)
+Test eval data size: input: torch.Size([256, 3, 32, 32]); output: torch.Size([256, 10])
+Testing time: 0.3102
