@@ -3,10 +3,15 @@ import json
 import os
 from Experiments import singleshot
 from Experiments import multishot
+from Experiments import ddp_singleshot
+
 from Experiments.theory import unit_conservation
 from Experiments.theory import layer_conservation
 from Experiments.theory import imp_conservation
 from Experiments.theory import schedule_conservation
+
+# module needed for distributed data parallel
+import torch.multiprocessing as mp
 
 if __name__ == '__main__':
 
@@ -107,6 +112,7 @@ if __name__ == '__main__':
                         help='print statistics during training and testing')
     parser.add_argument('--data-parallel', action='store_true', default=False,
                         help='enable number of GPUs to use in Data Parallelism')
+    parser.add_argument('--ddp', action='store_true', default=False)
     parser.add_argument("--local_rank", type=int, default=0)
     parser.add_argument("--local_world_size", type=int, default=1)
     
@@ -136,16 +142,33 @@ if __name__ == '__main__':
             json.dump(args.__dict__, f, sort_keys=True, indent=4)
 
     ## Run Experiment ##
-    if args.experiment == 'singleshot':
-        singleshot.run(args)
-    if args.experiment == 'multishot':
-        multishot.run(args)
-    if args.experiment == 'unit-conservation':
-    	unit_conservation.run(args)
-    if args.experiment == 'layer-conservation':
-        layer_conservation.run(args)
-    if args.experiment == 'imp-conservation':
-        imp_conservation.run(args)
-    if args.experiment == 'schedule-conservation':
-        schedule_conservation.run(args)
+    # run without multiprocesses:
+    if not args.ddp:
+        if args.experiment == 'singleshot':
+            singleshot.run(args)
+        if args.experiment == 'multishot':
+            multishot.run(args)
+        if args.experiment == 'unit-conservation':
+            unit_conservation.run(args)
+        if args.experiment == 'layer-conservation':
+            layer_conservation.run(args)
+        if args.experiment == 'imp-conservation':
+            imp_conservation.run(args)
+        if args.experiment == 'schedule-conservation':
+            schedule_conservation.run(args)
+    else:
+        assert args.data_parallel is not False, 'data_parallel flag is not set for ddp'
+        assert args.experiment == 'singleshot', 'current experiment is not supported with multiprocessing'
+        # we only have 1 node in this experiment
+        node_size = 1
+        # we utilize 4 GPUs on Azure NV24 server
+        gpu_count = 4
+        # set the number of processes to be spawn
+        world_size = node_size * gpu_count
+        os.environ['MASTER_ADDR'] = '127.0.0.1'
+        os.environ['MASTER_PORT'] = '8888'
+        os.environ['WORLD_SIZE'] = str(world_size)
+        args.world_size = world_size
+        args.gpu_count = gpu_count
 
+        mp.spawn(ddp_singleshot.run, nprocs=gpu_count, args=(args,))

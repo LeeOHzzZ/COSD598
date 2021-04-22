@@ -16,19 +16,50 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 from torch.nn.parallel import DistributedDataParallel as ddp
 
+# this file is migrated from the orginal singleshot function to support DDP
 
+def run(gpu_id, args):
 
-def run(args):
+    ## parameters for multi-processing
+    print('using gpu', gpu_id)
+    dist.init_process_group(
+      backend = 'nccl',
+      init_method = 'env://',
+      world_size = args.world_size,
+      rank = gpu_id
+    )
+
     ## Random Seed and Device ##
     torch.manual_seed(args.seed)
-    device = load.device(args.gpu)
+    # device = load.device(args.gpu)
+    device = torch.device(gpu_id)
+
+    args.gpu_id = gpu_id
 
     ## Data ##
     print('Loading {} dataset.'.format(args.dataset))
-    input_shape, num_classes = load.dimension(args.dataset) 
-    prune_loader, _ = load.dataloader(args.dataset, args.prune_batch_size, True, args.workers, args.prune_dataset_ratio * num_classes)
-    train_loader, _ = load.dataloader(args.dataset, args.train_batch_size, True, args.workers)
+    input_shape, num_classes = load.dimension(args.dataset)
+
+    ## need to change the workers for loading the data
+    args.workers = int((args.workers + 4 - 1)/4)
+    print('Adjusted dataloader worker number is ', args.workers)
+
+    # prune_loader = load.dataloader(args.dataset, args.prune_batch_size, True, args.workers,
+    #                 args.prune_dataset_ratio * num_classes, world_size=args.world_size, rank=gpu_id)
+    prune_loader, _ = load.dataloader(args.dataset, args.prune_batch_size, True, args.workers,
+                    args.prune_dataset_ratio * num_classes)
+
+    ## need to divide the training batch size for each GPU
+    args.train_batch_size = int(args.train_batch_size/args.gpu_count)
+    train_loader, train_sampler = load.dataloader(args.dataset, args.train_batch_size, True, args.workers, args=args)
+    # args.test_batch_size = int(args.test_batch_size/args.gpu_count)
     test_loader, _ = load.dataloader(args.dataset, args.test_batch_size, False, args.workers)
+    
+    print("data loader batch size (prune::train::test) is {}::{}::{}".format(
+        prune_loader.batch_size,
+        train_loader.batch_size,
+        test_loader.batch_size
+    ))
 
     log_filename = '{}/{}'.format(args.result_dir, 'result.log')
     fout = open(log_filename, 'w')
@@ -46,43 +77,15 @@ def run(args):
     model = load.model(args.model, args.model_class)(input_shape, 
                                                     num_classes, 
                                                     args.dense_classifier, 
-                                                    args.pretrained)
+                                                    args.pretrained)  
+    
+    ## wrap model with distributed dataparallel module
+    torch.cuda.set_device(gpu_id)
+    # model = model.to(device)
+    model.cuda(gpu_id)
+    model = ddp(model, device_ids = [gpu_id])
 
-    #########################################
-    # enable distributed data parallelism
-    #########################################
-    if (args.data_parallel):
-        # print('entering data_parallel')
-        # # These are the parameters used to initialize the process group
-        # env_dict = {
-        #     key: os.environ[key]
-        #     for key in ("MASTER_ADDR", "MASTER_PORT", "RANK", "WORLD_SIZE")
-        # }
-        # print(f"[{os.getpid()}] Initializing process group with: {env_dict}")
-        # dist.init_process_group(backend="nccl")
-        # print(
-        #     f"[{os.getpid()}] world_size = {dist.get_world_size()}, "
-        #     + f"rank = {dist.get_rank()}, backend={dist.get_backend()}"
-        # )
-
-        # local_rank = args.local_rank
-
-        # n = torch.cuda.device_count() // 4 # local world size is hardwired to 4
-        # device_ids = list(range(local_rank*n, (local_rank + 1) * n))
-        # print(
-        #     f"[{os.getpid()}] rank = {dist.get_rank()}, "
-        #     + f"world_size = {dist.get_world_size()}, n = {n}, device_ids = {device_ids}"
-        # )
-        # model = model.cuda(device_ids[0])
-        # # replace model with ddp model here
-        # model = ddp(model, device_ids)
-        if torch.cuda.device_count() > 1:
-            print("let's use", torch.cuda.device_count(), "GPUs!")
-            model = nn.DataParallel(model)
-        
-    model = model.to(device)
-
-
+    ## don't need to move the loss to the GPU as it contains no parameters
     loss = nn.CrossEntropyLoss()
     opt_class, opt_kwargs = load.optimizer(args.optimizer)
     optimizer = opt_class(generator.parameters(model), lr=args.lr, weight_decay=args.weight_decay, **opt_kwargs)
@@ -91,21 +94,21 @@ def run(args):
     ## Pre-Train ##
     print('Pre-Train for {} epochs.'.format(args.pre_epochs))
     pre_result = train_eval_loop(model, loss, optimizer, scheduler, train_loader, 
-                                test_loader, device, args.pre_epochs, args.verbose)
+                                test_loader, device, args.pre_epochs, args.verbose, train_sampler=train_sampler)
     print('Pre-Train finished!')
     
     ## Save Original ##
-    torch.save(model.state_dict(),"{}/pre_train_model.pt".format(args.result_dir))
-    torch.save(optimizer.state_dict(),"{}/pre_train_optimizer.pt".format(args.result_dir))
-    torch.save(scheduler.state_dict(),"{}/pre_train_scheduler.pt".format(args.result_dir))
+    torch.save(model.state_dict(),"{}/pre_train_model_{}.pt".format(args.result_dir, gpu_id))
+    torch.save(optimizer.state_dict(),"{}/pre_train_optimizer_{}.pt".format(args.result_dir, gpu_id))
+    torch.save(scheduler.state_dict(),"{}/pre_train_scheduler_{}.pt".format(args.result_dir, gpu_id))
 
     for compression in args.compression_list:
         for p in args.pruner_list:
             # Reset Model, Optimizer, and Scheduler
             print('compression ratio: {} ::: pruner: {}'.format(compression, p))
-            model.load_state_dict(torch.load("{}/pre_train_model.pt".format(args.result_dir), map_location=device))
-            optimizer.load_state_dict(torch.load("{}/pre_train_optimizer.pt".format(args.result_dir), map_location=device))
-            scheduler.load_state_dict(torch.load("{}/pre_train_scheduler.pt".format(args.result_dir), map_location=device))
+            model.load_state_dict(torch.load("{}/pre_train_model_{}.pt".format(args.result_dir, gpu_id), map_location=device))
+            optimizer.load_state_dict(torch.load("{}/pre_train_optimizer_{}.pt".format(args.result_dir, gpu_id), map_location=device))
+            scheduler.load_state_dict(torch.load("{}/pre_train_scheduler_{}.pt".format(args.result_dir, gpu_id), map_location=device))
 
             ## Prune ##
             print('Pruning with {} for {} epochs.'.format(p, args.prune_epochs))
@@ -119,7 +122,7 @@ def run(args):
             print('Post-Training for {} epochs.'.format(args.post_epochs))
             post_train_start_time = timeit.default_timer()
             post_result = train_eval_loop(model, loss, optimizer, scheduler, train_loader, 
-                                        test_loader, device, args.post_epochs, args.verbose) 
+                                        test_loader, device, args.post_epochs, args.verbose, train_sampler=train_sampler) 
             post_train_end_time = timeit.default_timer()
             print("Post Training time: {:.4f}s".format(post_train_end_time - post_train_start_time))
 
@@ -148,7 +151,6 @@ def run(args):
                 for data, target in test_loader:
                     data, target = data.to(device), target.to(device)
                     temp_eval_out = model(data)
-                    # print("Test eval data size: input: {}; output: {}".format(data.size(), temp_eval_out.size()))
             end_time = timeit.default_timer()
             print("Testing time: {:.4f}s".format(end_time - start_time))
 
@@ -176,4 +178,4 @@ def run(args):
 
     fout.close()
 
-    # dist.destroy_process_group()
+    dist.destroy_process_group()
