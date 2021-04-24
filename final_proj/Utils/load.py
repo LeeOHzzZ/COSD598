@@ -38,7 +38,7 @@ def get_transform(size, padding, mean, std, preprocess):
     transform.append(transforms.Normalize(mean, std))
     return transforms.Compose(transform)
 
-def dataloader(dataset, batch_size, train, workers, length=None):
+def dataloader(dataset, batch_size, train, workers, length=None, args=None):
     # Dataset
     if dataset == 'mnist':
         mean, std = (0.1307,), (0.3081,)
@@ -83,12 +83,38 @@ def dataloader(dataset, batch_size, train, workers, length=None):
         indices = torch.randperm(len(dataset))[:length]
         dataset = torch.utils.data.Subset(dataset, indices)
 
+    # ## when world_size and rank is given then use distributed sampler
+    # if world_size is not None and rank is not None:
+    #     print('creating sampler to divide the data for dataloader')
+    #     sampler = torch.utils.data.DistributedSampler(
+    #         dataset,
+    #         num_replicas=world_size,
+    #         rank=rank
+    #     )
+    #     return torch.utils.data.DataLoader(
+    #         dataset=dataset,
+    #         batch_size=batch_size,
+    #         sampler=sampler,
+    #         shuffle=False,
+    #         **kwargs
+    #     )
+
+    if args is not None and args.ddp:
+        print('creating sampler to divide the data for dataloader')
+        # sampler = torch.utils.data.DistributedSampler(
+        #     dataset, num_replicas=args.gpu_count, rank = args.gpu_id
+        # )
+        sampler = torch.utils.data.DistributedSampler(dataset)
+    else:
+        sampler = None
+
     dataloader = torch.utils.data.DataLoader(dataset=dataset, 
                                              batch_size=batch_size, 
-                                             shuffle=shuffle, 
+                                             shuffle=shuffle and (sampler is None),
+                                             sampler=sampler,
                                              **kwargs)
 
-    return dataloader
+    return dataloader, sampler
 
 def model(model_architecture, model_class):
     default_models = {

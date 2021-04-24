@@ -1,0 +1,253 @@
+WARNING: this experiment is not being saved.
+using gpu 2
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+using gpu 3
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+using gpu 0
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+using gpu 1
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: rand
+Pruning with rand for 1 epochs.
+Post-Training for 20 epochs.
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: rand
+Pruning with rand for 1 epochs.
+Post-Training for 20 epochs.
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: rand
+Pruning with rand for 1 epochs.
+Post-Training for 20 epochs.
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: rand
+Pruning with rand for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 435.068233s::67.574050s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.753412s::3.378703s
+Post Training time: 506.0516s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585           7.56          50.10
+Final      20    0.096628   0.534630          83.33          98.76
+Train_Eval_Loop: total_train_time::total_eval_time is 435.609762s::66.957677s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.780488s::3.347884s
+Post Training time: 506.0389s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585           7.56          50.10
+Final      20    0.092936   0.534630          83.33          98.76
+Train_Eval_Loop: total_train_time::total_eval_time is 435.155952s::67.430556s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.757798s::3.371528s
+Post Training time: 506.0603s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585           7.56          50.10
+Final      20    0.092678   0.534630          83.33          98.76
+Train_Eval_Loop: total_train_time::total_eval_time is 435.001027s::67.462852s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.750051s::3.373143s
+Post Training time: 506.0440s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585           7.56          50.10
+Final      20    0.088657   0.534630          83.33          98.76
+Testing time: 3.2843s
+compression ratio: 0.5 ::: pruner: snip
+Pruning with snip for 1 epochs.
+Testing time: 3.2852s
+compression ratio: 0.5 ::: pruner: snip
+Pruning with snip for 1 epochs.
+Testing time: 3.3001s
+compression ratio: 0.5 ::: pruner: snip
+Pruning with snip for 1 epochs.
+Testing time: 3.3022s
+compression ratio: 0.5 ::: pruner: snip
+Pruning with snip for 1 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.331980s::66.428774s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.716599s::3.321439s
+Post Training time: 504.1272s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.431375           9.32          50.14
+Final      20    0.084151   0.462749          84.87          99.03
+Train_Eval_Loop: total_train_time::total_eval_time is 434.338775s::66.389252s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.716939s::3.319463s
+Post Training time: 504.1397s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.431375           9.32          50.14
+Final      20    0.084995   0.462749          84.87          99.03
+Train_Eval_Loop: total_train_time::total_eval_time is 434.240397s::66.536680s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.712020s::3.326834s
+Post Training time: 504.1390s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.431375           9.32          50.14
+Final      20     0.08844   0.462749          84.87          99.03
+Train_Eval_Loop: total_train_time::total_eval_time is 433.501155s::66.974474s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.675058s::3.348724s
+Post Training time: 504.1488s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.431375           9.32          50.14
+Final      20     0.08346   0.462749          84.87          99.03
+Testing time: 3.2884s
+compression ratio: 0.5 ::: pruner: grasp
+Pruning with grasp for 1 epochs.
+Testing time: 3.3134s
+compression ratio: 0.5 ::: pruner: grasp
+Pruning with grasp for 1 epochs.
+Testing time: 3.2871s
+compression ratio: 0.5 ::: pruner: grasp
+Pruning with grasp for 1 epochs.
+Testing time: 3.5061s
+compression ratio: 0.5 ::: pruner: grasp
+Pruning with grasp for 1 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 433.324704s::66.641623s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.666235s::3.332081s
+Post Training time: 503.4123s
+Train results:
+                train_loss     test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN  2.417717e+00          11.73          50.17
+Pre-Prune  0          NaN  2.417717e+00          11.73          50.17
+Post-Prune 0          NaN  2.661751e+08          10.00          50.00
+Final      20    0.387583  1.512594e+00          45.36          91.32
+Train_Eval_Loop: total_train_time::total_eval_time is 433.667766s::66.390486s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.683388s::3.319524s
+Post Training time: 503.4065s
+Train results:
+                train_loss     test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN  2.417717e+00          11.73          50.17
+Pre-Prune  0          NaN  2.417717e+00          11.73          50.17
+Post-Prune 0          NaN  2.661751e+08          10.00          50.00
+Final      20    0.384161  1.512594e+00          45.36          91.32
+Train_Eval_Loop: total_train_time::total_eval_time is 433.574824s::66.513754s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.678741s::3.325688s
+Post Training time: 503.4054s
+Train results:
+                train_loss     test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN  2.417717e+00          11.73          50.17
+Pre-Prune  0          NaN  2.417717e+00          11.73          50.17
+Post-Prune 0          NaN  2.661751e+08          10.00          50.00
+Final      20    0.391995  1.512594e+00          45.36          91.32
+Train_Eval_Loop: total_train_time::total_eval_time is 433.387976s::66.615400s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.669399s::3.330770s
+Post Training time: 503.4290s
+Train results:
+                train_loss     test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN  2.417717e+00          11.73          50.17
+Pre-Prune  0          NaN  2.417717e+00          11.73          50.17
+Post-Prune 0          NaN  2.661751e+08          10.00          50.00
+Final      20    0.387506  1.512594e+00          45.36          91.32
+Testing time: 3.3224s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3115s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3129s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3052s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.073783s::66.245018s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.703689s::3.312251s
+Post Training time: 503.6713s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      20    0.070745   0.511681          84.76          98.71
+Train_Eval_Loop: total_train_time::total_eval_time is 433.937518s::66.405025s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.696876s::3.320251s
+Post Training time: 503.6834s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      20    0.070195   0.511681          84.76          98.71
+Train_Eval_Loop: total_train_time::total_eval_time is 433.611321s::66.686777s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.680566s::3.334339s
+Post Training time: 503.6759s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      20    0.073815   0.511681          84.76          98.71
+Train_Eval_Loop: total_train_time::total_eval_time is 433.666470s::66.723037s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.683323s::3.336152s
+Post Training time: 503.7216s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      20    0.071311   0.511681          84.76          98.71
+Testing time: 3.2726s
+Testing time: 3.2532s
+Testing time: 3.2994s
+Testing time: 3.3228s

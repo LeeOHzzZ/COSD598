@@ -1,0 +1,85 @@
+WARNING: this experiment is not being saved.
+using gpu 1
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+using gpu 2
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+using gpu 3
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+using gpu 0
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 433.599783s::66.595517s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.679989s::3.329776s
+Pre-Train finished!
+Staring Unpruned NN training
+Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 433.671393s::66.472142s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.683570s::3.323607s
+Pre-Train finished!
+Staring Unpruned NN training
+Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.036809s::66.122058s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.701840s::3.306103s
+Pre-Train finished!
+Staring Unpruned NN training
+Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 433.633130s::66.566613s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.681656s::3.328331s
+Pre-Train finished!
+Staring Unpruned NN training
+Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 433.924804s::66.084326s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.696240s::3.304216s
+Train results:
+           train_loss  test_loss  top1_accuracy  top5_accuracy
+Init. 0          NaN   0.531462          83.73          98.86
+Final 20    0.053247   0.504708          86.85          99.06
+Train_Eval_Loop: total_train_time::total_eval_time is 436.050875s::66.856361s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.802544s::3.342818s
+Train results:
+           train_loss  test_loss  top1_accuracy  top5_accuracy
+Init. 0          NaN   0.531462          83.73          98.86
+Final 20    0.053324   0.504708          86.85          99.06
+Train_Eval_Loop: total_train_time::total_eval_time is 434.703865s::66.307145s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.735193s::3.315357s
+Train results:
+           train_loss  test_loss  top1_accuracy  top5_accuracy
+Init. 0          NaN   0.531462          83.73          98.86
+Final 20    0.053704   0.504708          86.85          99.06
+Train_Eval_Loop: total_train_time::total_eval_time is 433.656166s::66.358321s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 21.682808s::3.317916s
+Train results:
+           train_loss  test_loss  top1_accuracy  top5_accuracy
+Init. 0          NaN   0.531462          83.73          98.86
+Final 20    0.050819   0.504708          86.85          99.06

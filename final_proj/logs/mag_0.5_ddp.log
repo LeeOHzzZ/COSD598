@@ -1,0 +1,97 @@
+WARNING: this experiment is not being saved.
+using gpu 3
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+using gpu 2
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+using gpu 1
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+using gpu 0
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 433.840742s::67.207728s
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: mag
+Pruning with mag for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.051700s::66.893468s
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: mag
+Pruning with mag for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.327625s::66.606314s
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: mag
+Pruning with mag for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.418605s::66.452833s
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: mag
+Pruning with mag for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 434.528646s::66.594087s
+Post Training time: 504.6816s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  20    0.091898   0.524928          83.43          99.00
+Post-Prune 0          NaN   0.532246          83.17          98.85
+Final      20    0.046672   0.502740          86.48          99.25
+Train_Eval_Loop: total_train_time::total_eval_time is 434.042779s::66.987168s
+Post Training time: 504.6931s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  20    0.096490   0.524928          83.43          99.00
+Post-Prune 0          NaN   0.532246          83.17          98.85
+Final      20    0.048006   0.502740          86.48          99.25
+Train_Eval_Loop: total_train_time::total_eval_time is 434.687833s::66.292846s
+Post Training time: 504.6806s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  20    0.094730   0.524928          83.43          99.00
+Post-Prune 0          NaN   0.532246          83.17          98.85
+Final      20    0.045768   0.502740          86.48          99.25
+Train_Eval_Loop: total_train_time::total_eval_time is 434.131636s::67.039624s
+Post Training time: 504.7910s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  20    0.091061   0.524928          83.43          99.00
+Post-Prune 0          NaN   0.532246          83.17          98.85
+Final      20    0.043468   0.502740          86.48          99.25
+Testing time: 3.3927s
+Testing time: 3.4219s
+Testing time: 3.4210s
+Testing time: 3.3188s

@@ -1,0 +1,60 @@
+WARNING: this experiment is not being saved.
+Loading cifar10 dataset.
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 0.5 ::: pruner: rand
+Pruning with rand for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 591.098151s::44.758214s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 29.554908s::2.237911s
+Post Training time: 638.1027s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585           7.56          50.10
+Final      20    0.356811   0.505186          83.71          98.99
+Testing time: 2.2091s
+compression ratio: 0.5 ::: pruner: snip
+Pruning with snip for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 591.483083s::44.780173s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 29.574154s::2.239009s
+Post Training time: 638.5132s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.441291          10.79          49.96
+Final      20    0.333567   0.523901          83.91          98.92
+Testing time: 2.2167s
+compression ratio: 0.5 ::: pruner: grasp
+Pruning with grasp for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 590.213701s::44.807993s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 29.510685s::2.240400s
+Post Training time: 637.2745s
+Train results:
+                train_loss     test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN  2.417717e+00          11.73          50.17
+Pre-Prune  0          NaN  2.417717e+00          11.73          50.17
+Post-Prune 0          NaN  6.332103e+08          10.00          50.00
+Final      20    1.833121  1.788342e+00          34.99          85.93
+Testing time: 2.2068s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 590.705271s::44.841557s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 29.535264s::2.242078s
+Post Training time: 637.8256s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      20     0.28885   0.476941          85.41          99.10
+Testing time: 2.2173s

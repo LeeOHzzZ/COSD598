@@ -115,6 +115,8 @@ if __name__ == '__main__':
     parser.add_argument('--ddp', action='store_true', default=False)
     parser.add_argument("--local_rank", type=int, default=0)
     parser.add_argument("--local_world_size", type=int, default=1)
+    parser.add_argument('--unpruned', action='store_true', default=False,
+                        help='disable pruning, default is False')
     
     args = parser.parse_args()
 

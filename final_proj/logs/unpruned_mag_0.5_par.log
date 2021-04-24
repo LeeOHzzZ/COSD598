@@ -1,0 +1,20 @@
+WARNING: this experiment is not being saved.
+Loading cifar10 dataset.
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Creating lottery-vgg16 model.
+let's use 4 GPUs!
+Pruning is disabled. Total training epoch = Pre-Train epochs + Post-Train epochs
+Pre-Train for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 480.926932s::53.053556s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 24.046347s::2.652678s
+Pre-Train finished!
+Staring Unpruned NN training
+Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 480.854382s::52.982564s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 24.042719s::2.649128s
+Train results:
+           train_loss  test_loss  top1_accuracy  top5_accuracy
+Init. 0          NaN   0.531462          83.73          98.86
+Final 20    0.201592   0.522608          86.47          98.91

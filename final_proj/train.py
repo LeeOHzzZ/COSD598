@@ -91,8 +91,12 @@ def train_eval_loop(model, loss, optimizer, scheduler, train_loader, test_loader
         rows.append(row)
     if epochs>0:
         print('Train_Eval_Loop: total_train_time::total_eval_time is {:04f}s::{:04f}s'.format(
+            train_time, eval_time
+        ))
+        print('Train_Eval_Loop: avg_train_time::avg_eval_time is {:04f}s::{:04f}s'.format(
             train_time/epochs, eval_time/epochs
         ))
+        
     columns = ['train_loss', 'test_loss', 'top1_accuracy', 'top5_accuracy']
     return pd.DataFrame(rows, columns=columns)
 

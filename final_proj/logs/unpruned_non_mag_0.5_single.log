@@ -1,0 +1,11 @@
+WARNING: this experiment is not being saved.
+Loading cifar10 dataset.
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Creating lottery-vgg16 model.
+Pruning is disabled. Total training epoch = Pre-Train epochs + Post-Train epochs
+Pre-Train for 0 epochs.
+Pre-Train finished!
+Staring Unpruned NN training
+Training for 20 epochs.

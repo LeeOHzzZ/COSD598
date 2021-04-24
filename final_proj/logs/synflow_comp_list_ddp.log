@@ -1,0 +1,333 @@
+WARNING: this experiment is not being saved.
+using gpu 3
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+using gpu 2
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+using gpu 1
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+using gpu 0
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating lottery-vgg16 model.
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 0.05 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 0.05 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 0.05 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 0.05 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 217.266737s::33.120942s
+Post Training time: 253.8913s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.414332          11.66          50.38
+Final      10    0.148329   0.629782          79.37          98.23
+Train_Eval_Loop: total_train_time::total_eval_time is 217.015314s::33.368893s
+Post Training time: 253.8905s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.414332          11.66          50.38
+Final      10    0.152743   0.629782          79.37          98.23
+Train_Eval_Loop: total_train_time::total_eval_time is 216.803333s::33.503383s
+Post Training time: 253.9077s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.414332          11.66          50.38
+Final      10    0.143405   0.629782          79.37          98.23
+Train_Eval_Loop: total_train_time::total_eval_time is 217.060398s::33.349819s
+Post Training time: 253.9018s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.414332          11.66          50.38
+Final      10    0.147375   0.629782          79.37          98.23
+Testing time: 3.3373s
+compression ratio: 0.1 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3202s
+compression ratio: 0.1 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3557s
+compression ratio: 0.1 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3403s
+compression ratio: 0.1 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 217.388100s::33.241019s
+Post Training time: 253.9879s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.403529          11.45          49.92
+Final      10    0.147148   0.615039          80.12          98.30
+Train_Eval_Loop: total_train_time::total_eval_time is 217.424195s::33.282213s
+Post Training time: 254.0005s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.403529          11.45          49.92
+Final      10    0.150309   0.615039          80.12          98.30
+Train_Eval_Loop: total_train_time::total_eval_time is 217.013428s::33.663223s
+Post Training time: 254.0083s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.403529          11.45          49.92
+Final      10    0.142301   0.615039          80.12          98.30
+Train_Eval_Loop: total_train_time::total_eval_time is 217.275782s::33.425643s
+Post Training time: 254.0444s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.403529          11.45          49.92
+Final      10    0.144447   0.615039          80.12          98.30
+Testing time: 3.3707s
+compression ratio: 0.2 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3616s
+compression ratio: 0.2 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.5277s
+compression ratio: 0.2 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.5035s
+compression ratio: 0.2 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 217.320590s::33.522271s
+Post Training time: 254.1526s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.396133          10.04          51.07
+Final      10    0.139666   0.580169          80.18          98.74
+Train_Eval_Loop: total_train_time::total_eval_time is 217.215574s::33.604397s
+Post Training time: 254.1493s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.396133          10.04          51.07
+Final      10    0.134246   0.580169          80.18          98.74
+Train_Eval_Loop: total_train_time::total_eval_time is 217.367575s::33.383139s
+Post Training time: 254.1560s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.396133          10.04          51.07
+Final      10     0.13607   0.580169          80.18          98.74
+Train_Eval_Loop: total_train_time::total_eval_time is 216.932609s::33.885852s
+Post Training time: 254.1689s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.396133          10.04          51.07
+Final      10    0.132147   0.580169          80.18          98.74
+Testing time: 3.2573s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.2863s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3019s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3076s
+compression ratio: 0.5 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 217.101217s::33.405770s
+Post Training time: 253.8447s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      10    0.131002   0.585240          80.88          98.86
+Train_Eval_Loop: total_train_time::total_eval_time is 217.216230s::33.268848s
+Post Training time: 253.8447s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      10    0.130957   0.585240          80.88          98.86
+Train_Eval_Loop: total_train_time::total_eval_time is 217.105161s::33.414209s
+Post Training time: 253.8859s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      10    0.123436   0.585240          80.88          98.86
+Train_Eval_Loop: total_train_time::total_eval_time is 216.860454s::33.753535s
+Post Training time: 253.9807s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.329107           9.99          51.19
+Final      10    0.127354   0.585240          80.88          98.86
+Testing time: 3.4000s
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3745s
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.4282s
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3155s
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 217.235089s::33.381405s
+Post Training time: 253.9754s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302601          10.00          49.94
+Final      10    0.135225   0.577384          80.95          98.91
+Train_Eval_Loop: total_train_time::total_eval_time is 217.115108s::33.596442s
+Post Training time: 254.0247s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302601          10.00          49.94
+Final      10    0.131175   0.577384          80.95          98.91
+Train_Eval_Loop: total_train_time::total_eval_time is 217.012534s::33.569591s
+Post Training time: 254.0246s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302601          10.00          49.94
+Final      10    0.128161   0.577384          80.95          98.91
+Train_Eval_Loop: total_train_time::total_eval_time is 217.204277s::33.599679s
+Post Training time: 254.1072s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302601          10.00          49.94
+Final      10    0.136131   0.577384          80.95          98.91
+Testing time: 3.4374s
+compression ratio: 2.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3058s
+compression ratio: 2.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.3811s
+compression ratio: 2.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Testing time: 3.5323s
+compression ratio: 2.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Post-Training for 10 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 217.446714s::33.286217s
+Post Training time: 254.0227s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585          10.00          50.00
+Final      10    0.575677   2.302589          10.00          50.00
+Train_Eval_Loop: total_train_time::total_eval_time is 216.959014s::33.551942s
+Post Training time: 254.0410s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585          10.00          50.00
+Final      10    0.575656   2.302589          10.00          50.00
+Train_Eval_Loop: total_train_time::total_eval_time is 217.473469s::33.285059s
+Post Training time: 254.0703s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585          10.00          50.00
+Final      10    0.575668   2.302589          10.00          50.00
+Train_Eval_Loop: total_train_time::total_eval_time is 217.155931s::33.818086s
+Post Training time: 254.2931s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.417717          11.73          50.17
+Pre-Prune  0          NaN   2.417717          11.73          50.17
+Post-Prune 0          NaN   2.302585          10.00          50.00
+Final      10    0.575659   2.302589          10.00          50.00
+Testing time: 3.5017s
+Testing time: 3.5379s
+Testing time: 3.5433s
+Testing time: 3.3126s
