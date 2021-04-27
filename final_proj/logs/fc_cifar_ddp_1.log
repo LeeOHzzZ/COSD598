@@ -1,0 +1,97 @@
+WARNING: this experiment is not being saved.
+using gpu 0
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+using gpu 2
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+using gpu 1
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+using gpu 3
+Loading cifar10 dataset.
+Adjusted dataloader worker number is  1
+Files already downloaded and verified
+Files already downloaded and verified
+creating sampler to divide the data for dataloader
+Files already downloaded and verified
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 109.780806s::61.849883s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 5.489040s::3.092494s
+Post Training time: 174.7247s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.303814           10.0           50.0
+Pre-Prune  0          NaN   2.303814           10.0           50.0
+Post-Prune 0          NaN   2.304047           10.0           50.0
+Final      20    0.575668   2.302595           10.0           50.0
+Train_Eval_Loop: total_train_time::total_eval_time is 108.831536s::62.925965s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 5.441577s::3.146298s
+Post Training time: 174.7915s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.303814           10.0           50.0
+Pre-Prune  0          NaN   2.303814           10.0           50.0
+Post-Prune 0          NaN   2.304047           10.0           50.0
+Final      20    0.575702   2.302595           10.0           50.0
+Train_Eval_Loop: total_train_time::total_eval_time is 109.262839s::62.531878s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 5.463142s::3.126594s
+Post Training time: 174.8972s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.303814           10.0           50.0
+Pre-Prune  0          NaN   2.303814           10.0           50.0
+Post-Prune 0          NaN   2.304047           10.0           50.0
+Final      20    0.575669   2.302595           10.0           50.0
+Train_Eval_Loop: total_train_time::total_eval_time is 109.927658s::61.955061s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 5.496383s::3.097753s
+Post Training time: 174.9748s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.303814           10.0           50.0
+Pre-Prune  0          NaN   2.303814           10.0           50.0
+Post-Prune 0          NaN   2.304047           10.0           50.0
+Final      20    0.575693   2.302595           10.0           50.0
+Testing time: 3.0747s
+Testing time: 3.0622s
+Testing time: 3.0362s
+Testing time: 3.0709s

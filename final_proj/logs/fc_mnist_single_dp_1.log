@@ -1,0 +1,19 @@
+WARNING: this experiment is not being saved.
+Loading mnist dataset.
+Creating default-fc model.
+let's use 4 GPUs!
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 58.461603s::12.176879s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 2.923080s::0.608844s
+Post Training time: 71.2299s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.306855          10.32          47.39
+Pre-Prune  0          NaN   2.306855          10.32          47.39
+Post-Prune 0          NaN   2.306644          10.32          49.80
+Final      20    2.301264   2.301070          11.35          51.85
+Testing time: 0.6010s

@@ -1,0 +1,21 @@
+WARNING: this experiment is not being saved.
+Loading cifar10 dataset.
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+Creating default-fc model.
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 71.373909s::13.279999s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 3.568695s::0.664000s
+Post Training time: 85.4642s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.303814           10.0           50.0
+Pre-Prune  0          NaN   2.303814           10.0           50.0
+Post-Prune 0          NaN   2.304047           10.0           50.0
+Final      20    2.302734   2.302594           10.0           50.0
+Testing time: 0.6798s

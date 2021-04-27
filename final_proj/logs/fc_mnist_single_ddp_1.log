@@ -1,0 +1,85 @@
+WARNING: this experiment is not being saved.
+using gpu 3
+Loading mnist dataset.
+Adjusted dataloader worker number is  1
+creating sampler to divide the data for dataloader
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+using gpu 1
+Loading mnist dataset.
+Adjusted dataloader worker number is  1
+creating sampler to divide the data for dataloader
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+using gpu 2
+Loading mnist dataset.
+Adjusted dataloader worker number is  1
+creating sampler to divide the data for dataloader
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+using gpu 0
+Loading mnist dataset.
+Adjusted dataloader worker number is  1
+creating sampler to divide the data for dataloader
+data loader batch size (prune::train::test) is 256::64::256
+Creating default-fc model.
+Pre-Train for 0 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Pre-Train finished!
+compression ratio: 1.0 ::: pruner: synflow
+Pruning with synflow for 1 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Post-Training for 20 epochs.
+Train_Eval_Loop: total_train_time::total_eval_time is 80.343670s::53.180957s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 4.017184s::2.659048s
+Post Training time: 136.2505s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.306855          10.32          47.39
+Pre-Prune  0          NaN   2.306855          10.32          47.39
+Post-Prune 0          NaN   2.306644          10.32          49.80
+Final      20    0.575444   2.301114          11.35          51.62
+Train_Eval_Loop: total_train_time::total_eval_time is 80.337070s::53.154087s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 4.016853s::2.657704s
+Post Training time: 136.2906s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.306855          10.32          47.39
+Pre-Prune  0          NaN   2.306855          10.32          47.39
+Post-Prune 0          NaN   2.306644          10.32          49.80
+Final      20    0.575323   2.301114          11.35          51.62
+Train_Eval_Loop: total_train_time::total_eval_time is 79.891305s::53.901112s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 3.994565s::2.695056s
+Post Training time: 136.3787s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.306855          10.32          47.39
+Pre-Prune  0          NaN   2.306855          10.32          47.39
+Post-Prune 0          NaN   2.306644          10.32          49.80
+Final      20    0.575283   2.301114          11.35          51.62
+Train_Eval_Loop: total_train_time::total_eval_time is 79.772079s::53.937021s
+Train_Eval_Loop: avg_train_time::avg_eval_time is 3.988604s::2.696851s
+Post Training time: 136.4606s
+Train results:
+                train_loss  test_loss  top1_accuracy  top5_accuracy
+Init.      0          NaN   2.306855          10.32          47.39
+Pre-Prune  0          NaN   2.306855          10.32          47.39
+Post-Prune 0          NaN   2.306644          10.32          49.80
+Final      20     0.57525   2.301114          11.35          51.62
+Testing time: 2.5708s
+Testing time: 2.6617s
+Testing time: 2.6863s
+Testing time: 2.6519s
